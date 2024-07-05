@@ -54,7 +54,7 @@
         </div>
         {{-- {{ $kralen }} --}}
         <div class="row mt-2">
-            <div class="card-group">
+            <div class="cardsmix">
 
                 @foreach ($kralen as $kralenmix)
                     @foreach ($kralenmix as $kraalchunck)
@@ -83,10 +83,10 @@
         @endforeach --}}
         <div class="row mt-2">
             <div class="card-group">
-
+                <ul class="cardsmix">
                 @foreach ($kraleninmix as $kraleninmix)
                     @foreach ($kraleninmix as $kraallos)
-                        <div class="card mr-2" style="width: 10rem;">
+                        <div class="cardmix mr-2" style="width: 10rem;">
                             {{-- @foreach ($chunk as $kraalchunck) --}}
                             {{-- <li class="cards_item"> --}}
                             {{-- <div class="card text-center" style="width: 12rem;"> --}}
@@ -103,6 +103,7 @@
                         </div>
                     @endforeach
                 @endforeach
+                    </ul>
             </div>
         </div>
     @endsection
