@@ -12,7 +12,7 @@
             <ul class="cards">
                 @foreach ($kralen as $kraal)
                     {{-- @foreach ($chunk as $kraal) --}}
-                    <li class="cards_item text-center">
+                    {{-- <li class="cards_item text-center"> --}}
                         <div class="card">
                             <div class="card-img-top"><a href="{{ route('kralen.show', $kraal->id) }}"><img
                                         src="{{ url('images/' . $kraal->image) }}"></a></div>
@@ -40,7 +40,7 @@
                                 </form>
                             </div>
                         </div>
-                    </li>
+                    {{-- </li> --}}
                 @endforeach
             </ul>
         </div>
