@@ -20,10 +20,10 @@ body {
   padding: 1rem;
 }
 
-.main{
+/* .main{
   max-width: 1200px;
   margin: 0 auto;
-}
+} */
 
 h1 {
     font-size: 24px;
@@ -59,26 +59,10 @@ img {
   display: flex;
   flex-wrap: wrap;
   list-style: none;
-  margin: 0;
-  padding: 0;
+  /* margin: 0;
+  padding: 0; */
 }
 
-/* .cards_item {
-  display: flex;
-  padding: 1rem;
-}
-
-@media (min-width: 40rem) {
-  .cards_item {
-    width: 50%;
-  }
-}
-
-@media (min-width: 56rem) {
-  .cards_item {
-    width: 33.3333%;
-  }
-} */
 
 .card {
   background-color: white;

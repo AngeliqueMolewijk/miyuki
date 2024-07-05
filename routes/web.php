@@ -11,7 +11,7 @@ Route::get('/1', function () {
 });
 
 Route::get('/test', function () {
-    return view('welcome');
+    return view('kralen.test');
 });
 Route::resource('/kralen', KralenController::class);
 Route::resource('My', TestController::class);
