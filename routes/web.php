@@ -13,6 +13,8 @@ Route::get('/1', function () {
 Route::get('/test', function () {
     return view('kralen.test');
 });
+Route::get('/testgrid', [KralenController::class, 'testgrid']);
+
 Route::resource('/kralen', KralenController::class);
 Route::resource('My', TestController::class);
 Route::resource('/products', ProductController::class);

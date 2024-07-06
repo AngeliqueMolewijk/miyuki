@@ -185,4 +185,9 @@ class KralenController extends Controller
         $kralen = Kraal::orderBy('nummer', 'ASC')->get();
         return view('kralen.list', compact('kralen'));
     }
+    public function testgrid()
+    {
+        $kralen = Kraal::orderBy('nummer', 'ASC')->get();
+        return view('kralen.test', compact('kralen'));
+    }
 }
