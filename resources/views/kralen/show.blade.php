@@ -57,7 +57,7 @@
             <div class="cardsgrid">
                 @foreach ($kralen as $kralenmix)
                     @foreach ($kralenmix as $kraalchunck)
-                        <div class="cardgrid mr-2" style="">
+                        <div class="card mr-2" style="">
                             {{-- @foreach ($chunk as $kraalchunck) --}}
                             {{-- <li class="cards_item"> --}}
                             {{-- <div class="card text-center" style="width: 12rem;"> --}}
@@ -85,7 +85,7 @@
                 {{-- <ul class="cardgrid"> --}}
                 @foreach ($kraleninmix as $kraleninmix)
                     @foreach ($kraleninmix as $kraallos)
-                        <div class="cardgrid mr-2" style="width: 10rem;">
+                        <div class="card mr-2" style="width: 10rem;">
                             {{-- @foreach ($chunk as $kraalchunck) --}}
                             {{-- <li class="cards_item"> --}}
                             {{-- <div class="card text-center" style="width: 12rem;"> --}}
@@ -95,9 +95,7 @@
                                 <h5 class="card-title"> {{ $kraallos->name }}</h5>
                             </div>
                             <div class="card-footer">
-
                                 <small class="text-muted">Voorraad: {{ $kraallos->stock }}</small>
-
                             </div>
                         </div>
                     @endforeach

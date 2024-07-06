@@ -13,16 +13,17 @@
             @foreach ($kralen as $kraal)
                 {{-- @foreach ($chunk as $kraal) --}}
                 <div class="cards_item text-center">
-                    <div class="cardgrid">
+                    <div class="card">
                         <div class="card-img-top"><a href="{{ route('kralen.show', $kraal->id) }}"><img
                                     src="{{ url('images/' . $kraal->image) }}"></a></div>
                         <div class="card-body">
 
                             <div class="card_content">
                                 <h2 class="card_title">{{ $kraal->name }}</h2>
-                                <p class="card_text">Voorraad:
-                                    {{ $kraal->stock }}</p>
                             </div>
+
+                            <p class="card_text">Voorraad:
+                                {{ $kraal->stock }}</p>
                         </div>
                         <div class="card-footer">
 
