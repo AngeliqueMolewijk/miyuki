@@ -1,38 +1,43 @@
 .cardsgrid {
 
     display: grid;
-    
+
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    
+
     grid-auto-rows: auto;
-    
+
     grid-gap: 1rem;
-    
-    }
-    
-    
-    .cardgrid {
-        background-color: white;
-        border-radius: 0.25rem;
-        box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
-    
+
+}
+
+
+.cardgrid {
+    background-color: white;
+    border-radius: 0.25rem;
+    box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
+
 
     padding: .5rem;
-    
-    }
 
-    .card_title {
-        color: #000000;
-        font-size: 1.1rem;
-        font-weight: 700;
-        letter-spacing: 1px;
-        text-transform: capitalize;
-    }
-    .card_text {
-        color: #000000;
-        font-size: 0.875rem;
-        line-height: 1.5;
-        margin-bottom: 1.25rem;
-        font-weight: 400;
-    }
+}
 
+.card_title {
+    color: #000000;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: capitalize;
+}
+
+.card_text {
+    color: #000000;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    margin-bottom: 1.25rem;
+    font-weight: 400;
+}
+
+.card-img-top1 {
+    display: block;
+    margin: auto;
+}

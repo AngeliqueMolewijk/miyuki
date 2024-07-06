@@ -54,15 +54,14 @@
         </div>
         {{-- {{ $kralen }} --}}
         <div class="row mt-2">
-            <div class="cardsmix">
-
+            <div class="cardsgrid">
                 @foreach ($kralen as $kralenmix)
                     @foreach ($kralenmix as $kraalchunck)
-                        <div class="card mr-2" style="width: 10rem;">
+                        <div class="cardgrid mr-2" style="">
                             {{-- @foreach ($chunk as $kraalchunck) --}}
                             {{-- <li class="cards_item"> --}}
                             {{-- <div class="card text-center" style="width: 12rem;"> --}}
-                            <a href="{{ route('kralen.show', $kraalchunck->id) }}"><img class="card-img-top"
+                            <a href="{{ route('kralen.show', $kraalchunck->id) }}"><img class="card-img-top1"
                                     src="{{ url('images/' . $kraalchunck->image) }}"></a>
                             <div class="card-body">
                                 <h5 class="card-title"> {{ $kraalchunck->name }}</h5>
@@ -82,15 +81,15 @@
             {{ $inmix }};
         @endforeach --}}
         <div class="row mt-2">
-            <div class="card-group">
-                <ul class="cardsmix">
+            <div class="cardsgrid">
+                {{-- <ul class="cardgrid"> --}}
                 @foreach ($kraleninmix as $kraleninmix)
                     @foreach ($kraleninmix as $kraallos)
-                        <div class="cardmix mr-2" style="width: 10rem;">
+                        <div class="cardgrid mr-2" style="width: 10rem;">
                             {{-- @foreach ($chunk as $kraalchunck) --}}
                             {{-- <li class="cards_item"> --}}
                             {{-- <div class="card text-center" style="width: 12rem;"> --}}
-                            <a href="{{ route('kralen.show', $kraallos->id) }}"><img class="card-img-top"
+                            <a href="{{ route('kralen.show', $kraallos->id) }}"><img class="card-img-top1"
                                     src="{{ url('images/' . $kraallos->image) }}"></a>
                             <div class="card-body">
                                 <h5 class="card-title"> {{ $kraallos->name }}</h5>
@@ -103,7 +102,7 @@
                         </div>
                     @endforeach
                 @endforeach
-                    </ul>
+                {{-- </ul> --}}
             </div>
         </div>
     @endsection
