@@ -11,27 +11,30 @@
                 </div> --}}
             </div>
         </div>
-        <div class="row border">
-            <div class="col-md-2 " style="padding-left: 0px;  padding-right: 0px;">
-                <img class="card-img-top" src="{{ url('images/' . $kraal->image) }}" alt="Italian Trulli" width="200px">
-            </div>
-            <div class="col-md-12">
-                <div class="form-group">
-                    <strong>Name:</strong>
-                    {{ $kraal->name }}
+        <div class="card">
+            <div class="row">
+                <div class="col-sm-4">
+                    <img class="card-img-top" src="{{ url('images/' . $kraal->image) }}" alt="Italian Trulli" width="200px">
+                </div>
+                <div class="col-sm-8 my-element">
+                    <div class="row ">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <h4><strong>Naam: </strong>
+                                    {{ $kraal->name }}</h4>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <h4><strong>Voorraad:</strong>
+                                    {{ $kraal->stock }} gram</h4>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    <strong>Stock:</strong>
-                    {{ $kraal->stock }}
-                </div>
-            </div>
-            {{-- </div> --}}
         </div>
-
-        <div class="mt-2">
-            Kralen die in deze mix voorkomen
+        <div class="card">
 
             <form action="{{ url('/storemix') }}" method="POST" enctype="multipart/form-data">
                 @csrf
@@ -48,10 +51,17 @@
                 <input type="hidden" name="mixid" value="{{ $kraal->id }}">
 
                 <div class="col-xs-12 col-sm-12 col-md-12 text-center mt-2">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">kralen aan mix Toevoegen</button>
                 </div>
             </form>
+            <h3>
+                <div class="mt-2">
+                    Kralen die in deze mix voorkomen
+            </h3>
         </div>
+    </div>
+    <div class="container">
+
         {{-- {{ $kralen }} --}}
         <div class="row mt-2">
             <div class="cardsgrid">
@@ -68,7 +78,7 @@
                             </div>
                             <div class="card-footer">
 
-                                <small class="text-muted">Voorraad: {{ $kraalchunck->stock }}</small>
+                                <small class="text-muted">Voorraad: {{ $kraalchunck->stock }} gram</small>
 
                             </div>
                         </div>
@@ -76,7 +86,8 @@
                 @endforeach
             </div>
         </div>
-        Komt in deze mixen voor:
+        <h3>
+            Komt in deze mixen voor: </h3>
         {{-- @foreach ($kraleninmix as $inmix)
             {{ $inmix }};
         @endforeach --}}
@@ -95,7 +106,7 @@
                                 <h5 class="card-title"> {{ $kraallos->name }}</h5>
                             </div>
                             <div class="card-footer">
-                                <small class="text-muted">Voorraad: {{ $kraallos->stock }}</small>
+                                <small class="text-muted">Voorraad: {{ $kraallos->stock }} gram</small>
                             </div>
                         </div>
                     @endforeach
@@ -103,4 +114,5 @@
                 {{-- </ul> --}}
             </div>
         </div>
-    @endsection
+    </div>
+@endsection

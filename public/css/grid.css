@@ -46,3 +46,15 @@
       bottom:0;
       width:100%;
     } */
+
+
+    .my-element {
+        /* Use a flexbox layout */
+        display: flex;
+        
+        /* Make a horizontal flexbox (the default) */
+        flex-direction: row;
+        
+        /* The important part: vertically center the items */
+        align-items: center;
+    }
