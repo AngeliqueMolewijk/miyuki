@@ -173,7 +173,7 @@ img {
       border-bottom: 1px solid #ddd;
       display: block;
       font-size: .8em;
-      text-align: right;
+      text-align: center;
     }
     
     table td::before {
@@ -191,7 +191,10 @@ img {
       border-bottom: 0;
     }
   }
+table td{
+  text-align: center;
 
+}
 
   .cardmix {
 
@@ -219,4 +222,18 @@ img {
   @media (min-width: 900px) {
     .cardsmix { grid-template-columns: repeat(5, 1fr); }
   }
+  .nav-link {
+    /* font-family: 'Open Sans', sans-serif;
+    font-size: 0.8vw;
+    font-weight: bolder; */
+    text-transform: uppercase;
+    border-bottom: 1px solid transparent;
+    border-right: 1px solid #000;
+    height:100%
+    padding-top:27px;
+  }
   
+  .nav-link:hover {
+    border-bottom: 1px solid #ff7240;
+    color:#000!important;
+  }

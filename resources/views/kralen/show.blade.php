@@ -13,7 +13,7 @@
         </div>
         <div class="card">
             <div class="row">
-                <div class="col-sm-4">
+                <div class="col-sm-3">
                     <img class="card-img-top" src="{{ url('images/' . $kraal->image) }}" alt="Italian Trulli" width="200px">
                 </div>
                 <div class="col-sm-8 my-element">
@@ -22,6 +22,12 @@
                             <div class="form-group">
                                 <h4><strong>Naam: </strong>
                                     {{ $kraal->name }}</h4>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <h4><strong>Nummer: </strong>
+                                    {{ $kraal->nummer }}</h4>
                             </div>
                         </div>
                         <div class="col-md-12">
@@ -75,6 +81,8 @@
                                     src="{{ url('images/' . $kraalchunck->image) }}"></a>
                             <div class="card-body">
                                 <h5 class="card-title"> {{ $kraalchunck->name }}</h5>
+                                <h5 class="card-title"> Nummer: {{ $kraalchunck->nummer }}</h5>
+
                             </div>
                             <div class="card-footer">
 
@@ -104,6 +112,8 @@
                                     src="{{ url('images/' . $kraallos->image) }}"></a>
                             <div class="card-body">
                                 <h5 class="card-title"> {{ $kraallos->name }}</h5>
+                                <h5 class="card-title"> Nummer: {{ $kraallos->nummer }}</h5>
+
                             </div>
                             <div class="card-footer">
                                 <small class="text-muted">Voorraad: {{ $kraallos->stock }} gram</small>

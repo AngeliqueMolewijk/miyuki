@@ -16,7 +16,10 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('/list') }}">List</a>
                 </li>
-                <a class="btn btn-success" href="{{ route('kralen.create') }}"> Create New Product</a>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('/opvoorraad') }}">Op voorraad</a>
+                </li>
+                <a class="nav-link" href="{{ route('kralen.create') }}"> Create New Product</a>
 
                 {{-- <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"

@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kleur;
 use Illuminate\Http\Request;
 use App\Models\Kraal;
 use App\Models\Mix;
+use App\Models\kleurtype;
+
 use Illuminate\Support\Facades\Validator;
 
 use Redirect;
@@ -16,11 +19,19 @@ class KralenController extends Controller
         $kralen = Kraal::all();
         return view('kralen.index', compact('kralen'));
     }
+    public function opvoorraad()
+    {
+        $kralen = Kraal::where('stock', '>', 0)->get();
+        return view('kralen.index', compact('kralen'));
+    }
     public function create()
     {
         return view('kralen.create');
     }
-
+    public function createkleuren()
+    {
+        return view('kralen.createkleuren');
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -60,6 +71,7 @@ class KralenController extends Controller
         return redirect()->route('kralen.create')
             ->with('success', 'Product created successfully.');
     }
+
     public function storemix(Request $request)
     {
         $Mix = new Mix();
@@ -69,6 +81,7 @@ class KralenController extends Controller
         $Mix->mixnr = $request->mixid;
 
         $Mix->save();
+
         // return $this->show($Mix->kraalnr);
         return redirect()->route('kralen.show', $request->mixid);
         // return redirect()->route('kralen.show', [$Mix->kraalnr])
@@ -113,8 +126,24 @@ class KralenController extends Controller
      */
     public function edit(string $id)
     {
+        $kleuren = Kleur::all();
+
         $kraal = Kraal::findOrFail($id);
-        return view('kralen.edit', compact('kraal'));
+        $kleurtypes = kleurtype::where('kraalid', '=', $id)->get();
+
+        $kleurcollectie = kleurtype::Join('kleurs', 'kleurtypes.kleurid', '=', 'kleurs.id')
+            // ->join('kraals', 'kraals.id', '=', $kleurtype->kraalid)
+            ->where('kraalid', '=', $id)
+            ->get();
+        // dd($data);
+
+
+        $inkleurtypes = array();
+        foreach ($kleurtypes as $kleurtype) {
+            $kleurnummers = Kleur::where('id', '=', $kleurtype->kleurid)->get();
+            array_push($inkleurtypes, $kleurnummers);
+        }
+        return view('kralen.edit', compact('kraal', 'kleuren', 'kleurcollectie'));
     }
 
     /**
@@ -126,6 +155,7 @@ class KralenController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // dd($request);
         // dd($request);
         $kraal = Kraal::find($id);
         // dd($kraal);
@@ -144,7 +174,12 @@ class KralenController extends Controller
         // $puzzel->own = $request->eigen;
         // $puzzel->gelegd = $request->gelegd;
         $kraal->save();
-
+        if ($request->kleurid != 'Empty') {
+            $kleurtype = new kleurtype();
+            $kleurtype->kraalid = $id;
+            $kleurtype->kleurid = $request->kleurid;
+            $kleurtype->save();
+        }
         return back()
             ->with('success', 'Puzzel updated successfully');
     }
@@ -183,7 +218,9 @@ class KralenController extends Controller
     public function list()
     {
         $kralen = Kraal::orderBy('nummer', 'ASC')->get();
-        return view('kralen.list', compact('kralen'));
+
+        $mix = Mix::get('kraalnr');
+        return view('kralen.list', compact('kralen', 'mix'));
     }
     public function testgrid()
     {

@@ -7,7 +7,7 @@
     @endif
 
     <div class="main">
-        <h1>Responsive Card Grid Layout</h1>
+        <h1>Miyuki kralen</h1>
         <div class="cardsgrid">
             {{-- <ul class="cards"> --}}
             @foreach ($kralen as $kraal)
@@ -21,9 +21,10 @@
                             <div class="card_content">
                                 <h2 class="card_title">{{ $kraal->name }}</h2>
                             </div>
-
+                            <p class="card_text fw-bold">Nummer:
+                                {{ $kraal->nummer }}</p>
                             <p class="card_text">Voorraad:
-                                {{ $kraal->stock }}</p>
+                                {{ $kraal->stock }} gram</p>
                         </div>
                         <div class="card-footer">
 
@@ -44,6 +45,4 @@
             @endforeach
             {{-- </ul> --}}
         </div>
-
-        <h3 class="made_by">Made with ♡</h3>
     @endsection
