@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Kleur;
-use App\Models\kleurtype;
+use App\Models\Kleurtype;
 use App\Models\Kraal;
 use Illuminate\Support\Facades\Validator;
 
@@ -21,7 +21,8 @@ class KleurenController extends Controller
             ->get();
         $kleuren = Kleur::all();
         // dd($kleurcollectie);
-        return view('kleuren.index', compact('kleuren', 'kleurcollectie'));
+        return redirect()->route('kleuren.show', '1');
+        // return view('kleuren.index', compact('kleuren', 'kleurcollectie'));
     }
 
     /**

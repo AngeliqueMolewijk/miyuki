@@ -8,8 +8,24 @@
 
     grid-gap: 1rem;
 
-}
 
+}
+.cardgridkleur {
+    display: grid;
+
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+
+    grid-auto-rows: auto;
+
+    grid-gap: 0.5srem; ;
+}
+.card_title{
+    Height: 30px;
+
+}
+.kleurheight{
+    height: 50px;
+}
 
 .card {
     background-color: white;
@@ -57,4 +73,7 @@
         
         /* The important part: vertically center the items */
         align-items: center;
+    }
+    .card-body {
+        padding: .5rem .5rem;
     }

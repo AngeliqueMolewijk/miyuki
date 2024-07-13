@@ -36,30 +36,36 @@
                                     {{ $kraal->stock }} gram</h4>
                             </div>
                         </div>
+                        <div class="col-md-12">
+                            <a href="{{ route('kralen.edit', $kraal->id) }}" class="btn btn-primary" role="button"
+                                aria-pressed="true">Edit</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="card">
+            @if (strpos($kraal->name, '%mix%'))
+                <form action="{{ url('/storemix') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <select class="form-control" name="kraalid">
+                        {{-- {{ Form::open(['action' => 'KralenController@storemix']) }} --}}
+                        @foreach ($mixkiezen as $kiezen)
+                            <option value="{{ $kiezen->id }}">
+                                {{ $kiezen->nummer }} - {{ $kiezen->name }}
+                            </option>
+                        @endforeach
+                        {{-- {{ Form::close() }} --}}
 
-            <form action="{{ url('/storemix') }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                <select class="form-control" name="kraalid">
-                    {{-- {{ Form::open(['action' => 'KralenController@storemix']) }} --}}
-                    @foreach ($mixkiezen as $kiezen)
-                        <option value="{{ $kiezen->id }}">
-                            {{ $kiezen->nummer }} - {{ $kiezen->name }}
-                        </option>
-                    @endforeach
-                    {{-- {{ Form::close() }} --}}
+                    </select>
 
-                </select>
-                <input type="hidden" name="mixid" value="{{ $kraal->id }}">
+                    <input type="hidden" name="mixid" value="{{ $kraal->id }}">
+                    <div class="col-xs-12 col-sm-12 col-md-12 text-center mt-2">
+                        <button type="submit" class="btn btn-primary">kralen aan mix Toevoegen</button>
+                    </div>
+                </form>
+            @endif
 
-                <div class="col-xs-12 col-sm-12 col-md-12 text-center mt-2">
-                    <button type="submit" class="btn btn-primary">kralen aan mix Toevoegen</button>
-                </div>
-            </form>
             <h3>
                 <div class="mt-2">
                     Kralen die in deze mix voorkomen
@@ -94,6 +100,9 @@
                 @endforeach
             </div>
         </div>
+
+
+
         <h3>
             Komt in deze mixen voor: </h3>
         {{-- @foreach ($kraleninmix as $inmix)

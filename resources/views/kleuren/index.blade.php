@@ -23,12 +23,13 @@
                                     <div class="card_title" style="background-color:{{ $kleur->hexa }}">
                                     </div>
                                 </a>
+                                <h3>  {{ $kleur->kleur }}</h3>
                             </div>
-                            <h3 class="card_text fw-bold">{{ $kleur->kleur }}
+                            {{-- <h3 class="card_text fw-bold">
                             </h3>
                             <p class="card_text fw-bold">Hexa:
                                 {{ $kleur->hexa }}</p>
-                        </div>
+                        </div> --}}
 
                     </div>
                 </div>

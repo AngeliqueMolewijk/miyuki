@@ -5,11 +5,11 @@
             <p>{{ $message }}</p>
         </div>
     @endif
-    <div class="container">
+    <div class="row">
         <div class="col-md-5">
             <div class="main">
                 <h1>Miyuki kralen</h1>
-                <div class="cardsgrid">
+                <div class="cardgridkleur">
                     {{-- <ul class="cards"> --}}
                     @foreach ($kleuren as $kleur)
                         {{-- @foreach ($chunk as $kraal) --}}
@@ -18,17 +18,19 @@
                                 {{-- <div class="card-img-top"><a href="{{ route('kleuren.show', $kleur->id) }}"><img src=""></a>
                         </div> --}}
                                 <div class="card-body">
-
-                                    <div class="card_content">
+                                    <div class="card_content kleurheight">
                                         <a href="{{ route('kleuren.show', $kleur->id) }}">
-                                            <div class="card_title" style="background-color:{{ $kleur->hexa }}">
+                                            <div class="card_title h-50" style="background-color:{{ $kleur->hexa }}">
                                             </div>
+                                            </h3>
                                         </a>
+                                        {{ $kleur->kleur }}
+
                                     </div>
-                                    <h3 class="card_text fw-bold">{{ $kleur->kleur }}
-                                    </h3>
-                                    <p class="card_text fw-bold">Hexa:
-                                        {{ $kleur->hexa }}</p>
+                                    {{-- <h3 class="card_text fw-bold">{{ $kleur->kleur }}
+                                    </h3> --}}
+                                    {{-- <p class="card_text fw-bold">Hexa:
+                                        {{ $kleur->hexa }}</p> --}}
                                 </div>
 
                             </div>
@@ -61,9 +63,7 @@
                     @endforeach
                 </div>
             </div>
-            @foreach ($kleurcollectie as $collectie)
-                {{ $collectie->name }}
-            @endforeach
+
         </div>
     </div>
 @endsection

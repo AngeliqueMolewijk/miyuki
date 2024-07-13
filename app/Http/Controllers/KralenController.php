@@ -6,7 +6,7 @@ use App\Models\Kleur;
 use Illuminate\Http\Request;
 use App\Models\Kraal;
 use App\Models\Mix;
-use App\Models\kleurtype;
+use App\Models\Kleurtype;
 
 use Illuminate\Support\Facades\Validator;
 
@@ -133,7 +133,7 @@ class KralenController extends Controller
 
         $kleurcollectie = kleurtype::Join('kleurs', 'kleurtypes.kleurid', '=', 'kleurs.id')
             // ->join('kraals', 'kraals.id', '=', $kleurtype->kraalid)
-            ->where('kraalid', '=', $id)
+            ->where('kleurtypes.kraalid', '=', $id)
             ->get();
         // dd($data);
 
@@ -143,6 +143,7 @@ class KralenController extends Controller
             $kleurnummers = Kleur::where('id', '=', $kleurtype->kleurid)->get();
             array_push($inkleurtypes, $kleurnummers);
         }
+        // dd($kleurcollectie);
         return view('kralen.edit', compact('kraal', 'kleuren', 'kleurcollectie'));
     }
 
