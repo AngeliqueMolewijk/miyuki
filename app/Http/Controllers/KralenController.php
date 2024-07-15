@@ -231,7 +231,8 @@ class KralenController extends Controller
             ->orderBy('nummer', 'ASC')
             ->select('kraals.id', 'kraals.image', 'kraals.name', 'kraals.nummer', 'kraals.stock', 'kleurs.kleur')
             ->get();
-        // dd($kleurcollectie);
+        // dd($kleurcollectie); 
+
         // $kleurcollectie = $kleurcollecties->groupBy('kraals.id');
 
         // dd($kleurcollectie);
