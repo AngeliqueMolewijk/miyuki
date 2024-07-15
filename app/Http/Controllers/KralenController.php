@@ -175,6 +175,7 @@ class KralenController extends Controller
         // $puzzel->own = $request->eigen;
         // $puzzel->gelegd = $request->gelegd;
         $kraal->save();
+        // dd($request->kleurid);
         if ($request->kleurid != 'Empty') {
             $kleurtype = new kleurtype();
             $kleurtype->kraalid = $id;
@@ -219,9 +220,22 @@ class KralenController extends Controller
     public function list()
     {
         $kralen = Kraal::orderBy('nummer', 'ASC')->get();
+        $kleuren = Kleur::all();
 
         $mix = Mix::get('kraalnr');
-        return view('kralen.list', compact('kralen', 'mix'));
+
+        $kleurcollectie = Kraal::Leftjoin('kleurtypes', 'kraals.id', '=', 'kleurtypes.kraalid')
+            ->LeftJoin('kleurs', 'kleurtypes.kleurid', '=', 'kleurs.id')
+            // ->groupBy('kraals.id')
+            // ->where('kleurtypes.kraalid', '=', $id)
+            ->orderBy('nummer', 'ASC')
+            ->select('kraals.id', 'kraals.image', 'kraals.name', 'kraals.nummer', 'kraals.stock', 'kleurs.kleur')
+            ->get();
+        // dd($kleurcollectie);
+        // $kleurcollectie = $kleurcollecties->groupBy('kraals.id');
+
+        // dd($kleurcollectie);
+        return view('kralen.list', compact('kralen', 'mix', 'kleurcollectie', 'kleuren'));
     }
     public function testgrid()
     {

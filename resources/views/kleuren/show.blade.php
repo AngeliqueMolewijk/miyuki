@@ -6,39 +6,37 @@
         </div>
     @endif
     <div class="row">
-        <div class="col-md-5">
+        <div class="col-md-12">
             <div class="main">
                 <h1>Miyuki kralen</h1>
-                <div class="cardgridkleur">
-                    {{-- <ul class="cards"> --}}
-                    @foreach ($kleuren as $kleur)
-                        {{-- @foreach ($chunk as $kraal) --}}
-                        <div class="cards_item text-center">
+                {{-- <div class="cardgridkleur"> --}}
+                @foreach ($kleuren as $kleur)
+                    <div class="kleurenkaart">
+
+                        {{-- <div class="cards_item text-center">
                             <div class="card">
-                                {{-- <div class="card-img-top"><a href="{{ route('kleuren.show', $kleur->id) }}"><img src=""></a>
-                        </div> --}}
                                 <div class="card-body">
-                                    <div class="card_content kleurheight">
-                                        <a href="{{ route('kleuren.show', $kleur->id) }}">
-                                            <div class="card_title h-50" style="background-color:{{ $kleur->hexa }}">
-                                            </div>
-                                            </h3>
-                                        </a>
-                                        {{ $kleur->kleur }}
-
-                                    </div>
-                                    {{-- <h3 class="card_text fw-bold">{{ $kleur->kleur }}
-                                    </h3> --}}
-                                    {{-- <p class="card_text fw-bold">Hexa:
-                                        {{ $kleur->hexa }}</p> --}}
-                                </div>
-
+                                    <div class="card_content kleurheight"> --}}
+                        <a href="{{ route('kleuren.show', $kleur->id) }}">
+                            <div class="card_title h-50" style="background-color:{{ $kleur->hexa }}">
                             </div>
-                        </div>
-                    @endforeach
-                </div>
+                            </h3>
+                        </a>
+                        {{ $kleur->kleur }}
+
+                    </div>
+                    {{-- <h3 class="card_text fw-bold">{{ $kleur->kleur }}
+                                    </h3> --}}
+                    {{-- <p class="card_text fw-bold">Hexa:
+                                        {{ $kleur->hexa }}</p> --}}
+                @endforeach
             </div>
+
+            {{-- </div> --}}
         </div>
+        {{-- </div>
+    </div>
+    </div> --}}
         <div class="col-md-5">
             {{-- </ul> --}}
             <h3>In deze kleur komen de volgende kralen voor:</h3>

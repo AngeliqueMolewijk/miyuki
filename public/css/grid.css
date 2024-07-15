@@ -77,3 +77,11 @@
     .card-body {
         padding: .5rem .5rem;
     }
+    .kleurenkaart{
+        position: relative;
+        display: inline-block;
+        height: 60px;
+        width: 100px;
+        border-color: red;
+                border-radius: 0.25rem;
+    }

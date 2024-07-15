@@ -36,7 +36,7 @@
                                     {{ $kraal->stock }} gram</h4>
                             </div>
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-md-4">
                             <a href="{{ route('kralen.edit', $kraal->id) }}" class="btn btn-primary" role="button"
                                 aria-pressed="true">Edit</a>
                         </div>
