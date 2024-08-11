@@ -55,6 +55,7 @@
             "dont-discover": [
                 // "TelescopeServiceProvider"
             ]
+        
         }
     },
     "config": {
