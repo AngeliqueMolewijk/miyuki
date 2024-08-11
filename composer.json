@@ -51,11 +51,11 @@
         ]
     },
     "extra": {
-        // "laravel": {
-        //     "dont-discover": [
-        //         "TelescopeServiceProvider"
-        //     ]
-        // }
+        "laravel": {
+            "dont-discover": [
+                // "TelescopeServiceProvider"
+            ]
+        }
     },
     "config": {
         "optimize-autoloader": true,
