@@ -29,6 +29,7 @@
             <th scope="col">Nummer</th>
             <th width="10%">zit in mix</th>
             <th width="20%">Voorraad</th>
+            <th width="5%">Aantal</th>
             <th></th>
 
         </tr>
@@ -84,11 +85,15 @@
                 <td>
                     <div class="form-group">
                         <strong>Zit in mix:</strong>
-                        @if ($mix->contains('kraalnr', $kraal->id))
-                            <p>ja</p>
-                        @else
-                            <p>nee</p>
-                        @endif
+                        @foreach ($mix as $mixitem)
+                            @if ($mixitem->kraalnr == $kraal->id)
+                                <a href="{{ route('kralen.show', $mixitem->mixnr) }}">
+                                    <p> {{ $mixitem->mixnr }}</p>
+                                </a>
+                                {{-- @else
+                                <p>nee</p> --}}
+                            @endif
+                        @endforeach
                     </div>
 
                 </td>
@@ -97,6 +102,13 @@
                         <strong>stock:</strong>
                         <input type="text" name="stock" class="form-control" placeholder="Stock"
                             value="{{ $kraal->stock }}">
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <strong>aantal:</strong>
+                        <input type="text" name="countstock" class="form-control" placeholder="countstock"
+                            value="{{ $kraal->stock * 200 }}"readonly>
                     </div>
                 </td>
                 <td>

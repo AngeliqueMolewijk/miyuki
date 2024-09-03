@@ -36,6 +36,12 @@
                                     {{ $kraal->stock }} gram</h4>
                             </div>
                         </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <h4><strong>aantal:</strong>
+                                    {{ $kraal->stock * 200 }} stuks</h4>
+                            </div>
+                        </div>
                         <div class="col-md-4">
                             <a href="{{ route('kralen.edit', $kraal->id) }}" class="btn btn-primary" role="button"
                                 aria-pressed="true">Edit</a>
@@ -95,6 +101,11 @@
                                 <small class="text-muted">Voorraad: {{ $kraalchunck->stock }} gram</small>
 
                             </div>
+                            <div class="card-footer">
+
+                                <small class="text-muted">Aantal: {{ $kraalchunck->stock * 200 }} stukd</small>
+
+                            </div>
                         </div>
                     @endforeach
                 @endforeach
@@ -126,6 +137,40 @@
                             </div>
                             <div class="card-footer">
                                 <small class="text-muted">Voorraad: {{ $kraallos->stock }} gram</small>
+                            </div>
+                            {{-- <div class="card-footer">
+                                <small class="text-muted">aantal: {{ $kraallos->stock * 200 }} stuks</small>
+                            </div> --}}
+                        </div>
+                    @endforeach
+                @endforeach
+                {{-- </ul> --}}
+            </div>
+        </div>
+        <h3>
+            Komt in deze kleuren voor: </h3>
+        {{-- @foreach ($kraleninmix as $inmix)
+            {{ $inmix }};
+        @endforeach --}}
+        <div class="row mt-2">
+            <div class="cardsgrid">
+                {{-- <ul class="cardgrid"> --}}
+                @foreach ($inkleurtypes as $inkleurintypes)
+                    @foreach ($inkleurintypes as $inkleurintypeslos)
+                        <div class="card mr-2" style="width: 10rem;">
+                            {{-- @foreach ($chunk as $kraalchunck) --}}
+                            {{-- <li class="cards_item"> --}}
+                            {{-- <div class="card text-center" style="width: 12rem;"> --}}
+                            {{-- <a href="{{ route('kralen.show', $inkleurintypeslos->id) }}"><img class="card-img-top1"
+                                    src="{{ url('images/' . $inkleurintypeslos->hexa) }}"></a>
+                            <div class="card-body"> --}}
+                            <div class="card_title" style="background-color:{{ $inkleurintypeslos->hexa }}">
+                                {{-- <h5 class="card-title"> {{ $inkleurintypeslos->name }}</h5> --}}
+                                {{-- <h5 class="card-title"> Nummer: {{ $inkleurintypeslos->nummer }}</h5> --}}
+
+                            </div>
+                            <div class="card-footer">
+                                {{-- <small class="text-muted">Voorraad: {{ $inkleurintypeslos->stock }} gram</small> --}}
                             </div>
                         </div>
                     @endforeach

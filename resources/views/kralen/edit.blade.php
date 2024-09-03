@@ -47,6 +47,11 @@
                             placeholder="stock">
                     </div>
                     <div class="form-group">
+                        <strong>Aantal:</strong>
+                        <input type="text" name="aantal" class="form-control" value= "{{ $kraal->stock * 200 }}"
+                            placeholder="aantal" readonly>
+                    </div>
+                    <div class="form-group">
                         <strong>Nummer:</strong>
                         <input type="text" name="nummer" class="form-control" value= "{{ $kraal->nummer }}"
                             placeholder="nummer">

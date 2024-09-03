@@ -109,13 +109,19 @@ class KralenController extends Controller
         $mixkiezen = Kraal::where('nummer', 'not like', '%mix%')->orderBy('nummer', 'ASC')->get();
 
         $mixvoorkomt = Mix::where('kraalnr', '=', $id)->get();
+        $kleurtypes = kleurtype::where('kraalid', '=', $id)->get();
         $kraleninmix = array();
         foreach ($mixvoorkomt as $kraalvoorkomt) {
             $kraalinmix = Kraal::where('id', '=', $kraalvoorkomt->mixnr)->get();
             array_push($kraleninmix, $kraalinmix);
         }
 
-        return view('kralen.show', compact('kraal', 'mix', 'kralen', 'mixkiezen', 'kraleninmix'));
+        $inkleurtypes = array();
+        foreach ($kleurtypes as $kleurtype) {
+            $kleurnummers = Kleur::where('id', '=', $kleurtype->kleurid)->get();
+            array_push($inkleurtypes, $kleurnummers);
+        }
+        return view('kralen.show', compact('kraal', 'mix', 'kralen', 'mixkiezen', 'kraleninmix', 'inkleurtypes'));
     }
 
     /**
@@ -222,8 +228,9 @@ class KralenController extends Controller
         $kralen = Kraal::orderBy('nummer', 'ASC')->get();
         $kleuren = Kleur::all();
 
-        $mix = Mix::get('kraalnr');
-
+        // $mix = Mix::get('kraalnr');
+        $mix = Mix::all();
+        // dd($mix);
         $kleurcollectie = Kraal::Leftjoin('kleurtypes', 'kraals.id', '=', 'kleurtypes.kraalid')
             ->LeftJoin('kleurs', 'kleurtypes.kleurid', '=', 'kleurs.id')
             // ->groupBy('kraals.id')
