@@ -25,8 +25,8 @@
     <table>
         <tr class="bg-primary">
             <th scope="col">Image</th>
-            <th scope="col">Naam</th>
-            <th scope="col">Nummer</th>
+            <th width="30%">Naam</th>
+            <th width="10%">Nummer</th>
             <th width="10%">zit in mix</th>
             <th width="20%">Voorraad</th>
             <th width="5%">Aantal</th>
@@ -73,7 +73,7 @@
                     <div class="form-group">
                         <strong>Name:</strong>
                         <input type="text" name="name" class="form-control" placeholder="Name"
-                            value="{{ $kraal->name }}" size="50">
+                            value="{{ $kraal->name }}" size="40">
                 </td>
                 <td>
                     <div class="form-group">
