@@ -78,6 +78,34 @@
             </form>
         </div>
     </div>
+    <div class="card">
+        {{-- @if (strpos($kraal->name, '%mix%')) --}}
+        <form action="{{ url('/storemix') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <select class="form-control" name="kraalid">
+                {{-- {{ Form::open(['action' => 'KralenController@storemix']) }} --}}
+                @foreach ($mixkiezen as $kiezen)
+                    <option value="{{ $kiezen->id }}">
+                        {{ $kiezen->nummer }} - {{ $kiezen->name }}
+                    </option>
+                @endforeach
+                {{-- {{ Form::close() }} --}}
+
+            </select>
+
+            <input type="hidden" name="mixid" value="{{ $kraal->id }}">
+            <div class="col-xs-12 col-sm-12 col-md-12 text-center mt-2">
+                <button type="submit" class="btn btn-primary">kralen aan mix Toevoegen</button>
+            </div>
+        </form>
+        {{-- @endif --}}
+
+        <h3>
+            <div class="mt-2">
+                Kralen die in deze mix voorkomen
+        </h3>
+
+    </div>
     {{-- </div> --}}
     <h3>in deze kleurgroepen behoort deze kraal</h3>
     <div class="row mt-2">

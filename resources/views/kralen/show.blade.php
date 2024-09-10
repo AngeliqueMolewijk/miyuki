@@ -103,7 +103,7 @@
                             </div>
                             <div class="card-footer">
 
-                                <small class="text-muted">Aantal: {{ $kraalchunck->stock * 200 }} stukd</small>
+                                <small class="text-muted">Aantal: {{ $kraalchunck->stock * 200 }} stuks</small>
 
                             </div>
                         </div>

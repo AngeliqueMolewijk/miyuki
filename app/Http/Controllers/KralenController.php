@@ -136,7 +136,7 @@ class KralenController extends Controller
 
         $kraal = Kraal::findOrFail($id);
         $kleurtypes = kleurtype::where('kraalid', '=', $id)->get();
-
+        $mixkiezen = Kraal::where('nummer', 'not like', '%mix%')->orderBy('nummer', 'ASC')->get();
         $kleurcollectie = kleurtype::Join('kleurs', 'kleurtypes.kleurid', '=', 'kleurs.id')
             // ->join('kraals', 'kraals.id', '=', $kleurtype->kraalid)
             ->where('kleurtypes.kraalid', '=', $id)
@@ -150,7 +150,7 @@ class KralenController extends Controller
             array_push($inkleurtypes, $kleurnummers);
         }
         // dd($kleurcollectie);
-        return view('kralen.edit', compact('kraal', 'kleuren', 'kleurcollectie'));
+        return view('kralen.edit', compact('kraal', 'kleuren', 'kleurcollectie', 'mixkiezen'));
     }
 
     /**
