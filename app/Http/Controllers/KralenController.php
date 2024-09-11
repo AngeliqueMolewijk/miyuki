@@ -17,7 +17,8 @@ class KralenController extends Controller
     public function index()
     {
         $kralen = Kraal::all();
-        return view('kralen.index', compact('kralen'));
+        $aantalmix = Mix::all();
+        return view('kralen.index', compact('kralen', 'aantalmix'));
     }
     public function opvoorraad()
     {
@@ -219,9 +220,12 @@ class KralenController extends Controller
         // dd($request);
 
         // $search = $request->input('search');
-        $results = Kraal::where('name', 'like', "%mix%")->get();
+        $kralen = Kraal::where('name', 'like', "%mix%")->get();
 
-        return view('kralen.index', ['kralen' => $results]);
+
+        $aantalmix = Mix::all();
+
+        return view('kralen.index', compact('kralen', 'aantalmix'));
     }
     public function list()
     {

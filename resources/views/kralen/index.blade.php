@@ -26,6 +26,10 @@
                             <p class="card_text">Voorraad:
                                 {{ $kraal->stock }} gram</p>
                         </div>
+                        <p>Aantal kleuren:
+                        {{-- @foreach ($aantalmix as $mix) --}}
+                        {{ $aantalmix->where('mixnr', $kraal->id)->count() }}
+                        {{-- @endforeach --}}</p>
                         <div class="card-footer">
 
                             <form action="{{ route('kralen.destroy', $kraal->id) }}" method="POST">
