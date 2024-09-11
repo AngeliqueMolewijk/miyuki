@@ -23,7 +23,7 @@ Route::resource('My', TestController::class);
 Route::resource('/products', ProductController::class);
 Route::post('/storemix', [KralenController::class, 'storemix']);
 Route::post('/storekleuren', [KralenController::class, 'storekleuren']);
-
+Route::post('/destroymix', [KralenController::class, 'destroymix']);
 Route::post('/search', [KralenController::class, 'search']);
 Route::get('/searchmix', [KralenController::class, 'searchmix']);
 Route::get('/list', [KralenController::class, 'list']);

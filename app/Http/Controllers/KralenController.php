@@ -23,7 +23,8 @@ class KralenController extends Controller
     public function opvoorraad()
     {
         $kralen = Kraal::where('stock', '>', 0)->get();
-        return view('kralen.index', compact('kralen'));
+        $aantalmix = Mix::all();
+        return view('kralen.index', compact('kralen', 'aantalmix'));
     }
     public function create()
     {
@@ -87,6 +88,13 @@ class KralenController extends Controller
         return redirect()->route('kralen.show', $request->mixid);
         // return redirect()->route('kralen.show', [$Mix->kraalnr])
         //     ->with('success', 'Product created successfully.');
+    }
+    public function destroymix(Mix $Mix)
+    {
+        $Mix->delete();
+
+        return redirect()->route('kralen.index')
+            ->with('success', 'Mix deleted successfully');
     }
     /**
      * Display the specified resource.
