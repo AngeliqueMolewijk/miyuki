@@ -211,9 +211,9 @@ class KralenController extends Controller
         // dd($request);
 
         $search = $request->input('search');
-        $results = Kraal::where('name', 'like', "%$search%")->get();
-
-        return view('kralen.index', ['kralen' => $results]);
+        $kralen = Kraal::where('name', 'like', "%$search%")->get();
+        $aantalmix = Mix::all();
+        return view('kralen.index', compact('kralen', 'aantalmix'));
     }
     public function searchmix()
     {
