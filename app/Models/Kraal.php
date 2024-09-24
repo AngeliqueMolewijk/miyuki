@@ -17,5 +17,6 @@ class Kraal extends Model
         'stock',
         'image'
     ];
+    protected $table = 'kraals';
     public $sortable = ['nummer', 'name', 'stock',];
 }

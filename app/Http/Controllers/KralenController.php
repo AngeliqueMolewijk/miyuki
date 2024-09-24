@@ -207,12 +207,14 @@ class KralenController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Kraal $kraal)
+    public function destroy($id)
     {
+        $kraal = Kraal::find($id);
         $kraal->delete();
 
+
         return redirect()->route('kralen.index')
-            ->with('success', 'Puzzel deleted successfully');
+        ->with('success', 'Kraal deleted successfully');
     }
     public function search(Request $request)
     {

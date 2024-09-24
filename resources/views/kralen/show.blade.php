@@ -104,19 +104,7 @@
                             <div class="card-footer">
 
                                 <small class="text-muted">Aantal: {{ $kraalchunck->stock * 200 }} stuks</small>
-
                             </div>
-                            {{-- <form action="{{ route('kralen.destroymix', $kraalchunck->id) }}" method="POST">
-
-                                <a class="btn btn-info" href="{{ route('kralen.show', $kraal->id) }}">Show</a>
-
-                                <a class="btn btn-primary" href="{{ route('kralen.edit', $kraal->id) }}">Edit</a>
-
-                                @csrf
-                                @method('DELETE')
-
-                                <button type="submit" class="btn btn-danger" onclick="return myFunction();">Delete</button>
-                            </form> --}}
                         </div>
                     @endforeach
                 @endforeach

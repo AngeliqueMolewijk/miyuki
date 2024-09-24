@@ -26,24 +26,32 @@
                             <p class="card_text">Voorraad:
                                 {{ $kraal->stock }} gram</p>
                         </div>
-                        <p>Aantal kleuren:
                         {{-- @foreach ($aantalmix as $mix) --}}
-                        {{ $aantalmix->where('mixnr', $kraal->id)->count() }}
-                        {{-- @endforeach --}}</p>
+                        @if ($aantalmix->where('mixnr', $kraal->id)->count() > 0)
+                            <p>Aantal kleuren:
+                                {{ $aantalmix->where('mixnr', $kraal->id)->count() }}
+                                {{-- @endforeach --}}</p>
+                        @else
+                            <div>
+                                <p>Geen Mix</p>
+                            </div>
+                        @endif
+
                         <div class="card-footer">
 
                             <form action="{{ route('kralen.destroy', $kraal->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
 
                                 <a class="btn btn-info" href="{{ route('kralen.show', $kraal->id) }}">Show</a>
 
                                 <a class="btn btn-primary" href="{{ route('kralen.edit', $kraal->id) }}">Edit</a>
 
-                                @csrf
-                                @method('DELETE')
-
-                                <button type="submit" class="btn btn-danger" onclick="return myFunction();">Delete</button>
+                                <button type="submit" class="btn btn-danger"
+                                    onclick="return confirm('Do you want to delete this product?');">Delete</button>
                             </form>
                         </div>
+
                     </div>
                 </div>
             @endforeach

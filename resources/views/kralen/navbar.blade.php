@@ -23,7 +23,13 @@
                     <a class="nav-link" href="{{ url('/kleuren') }}">Kleuren</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('kralen.create') }}"> Create New Product</a>
+                    <a class="nav-link" href="{{ url('/projects') }}">Projecten</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('kralen.create') }}">Nieuwe kralen</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('projects.create') }}">Nieuw project</a>
                 </li>
                 {{-- <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
