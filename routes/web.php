@@ -32,7 +32,7 @@ Route::get('/opvoorraad', [KralenController::class, 'opvoorraad']);
 Route::get('clickgrid', [ProjectController::class, 'clickgrid']);
 Route::post('storekraalproject', [ProjectController::class, 'storekraalproject']);
 // Route::get('destroyuitproject/{kraalid}/{projectid}', 'ProjectController@destroyuitproject');
-Route::GET('/destroyuitproject/{projectid}/{kraalid})', [ProjectController::class, 'destroyuitproject'])->name('become-a-customer');
-
+Route::GET('/destroyuitproject/{projectid}/{kraalid})', [ProjectController::class, 'destroyuitproject'])->name('delete-from-project');
+Route::GET('/destroyuitmix/{mixid}/{kraalid})', [KralenController::class, 'destroyuitmix'])->name('delete-from-mix');
 // Route::delete('/destroyuitproject/{id}', 'projectController@destroyuitproject')->name('projects.destroyuitproject');
 // Route::delete('destroyuitproject/{{kraalid}}{{projectid}}', [ProjectController::class, 'destroyuitproject']);

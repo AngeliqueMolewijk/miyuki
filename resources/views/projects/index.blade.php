@@ -8,6 +8,8 @@
 
     <div class="main">
         <h1>Projecten</h1>
+        <a href="{{ route('projects.create') }}" class="btn btn-info" role="button">Nieuw Project</a>
+
         <div class="cardsgrid">
             {{-- <ul class="cards"> --}}
             @foreach ($projecten as $project)
@@ -22,7 +24,7 @@
                                 <h2 class="card_title">{{ $project->naam }}</h2>
                             </div>
                             <p class="card_text fw-bold">omschrijving:</p>
-                                {{ $project->omschrijving }}
+                            {{ $project->omschrijving }}
                         </div>
                     </div>
                 </div>

@@ -102,7 +102,7 @@
                             <small class="text-muted">Voorraad: {{ $kraallos->stock }} gram</small>
                         </div>
                         <form
-                            action="{{ route('become-a-customer', ['projectid' => $project->id, 'kraalid' => $kraallos->kraalid]) }}"
+                            action="{{ route('delete-from-project', ['projectid' => $project->id, 'kraalid' => $kraallos->kraalid]) }}"
                             method="get">
 
                             <a class="btn btn-info" href="{{ route('kralen.show', $kraallos->kraalid) }}">Show</a>
@@ -111,7 +111,9 @@
                             {{-- @method('DELETE')
                             @csrf --}}
 
-                            <button type="submit" class="btn btn-danger" onclick="return myFunction();">Delete</button>
+                            <button type="submit" class="btn btn-danger"
+                                onclick="return confirm('Do you want to delete this product?');">Delete from
+                                project</button>
                         </form>
 
 

@@ -44,10 +44,10 @@
                     <textarea name="description" class="form-control" placeholder="description">
                     </textarea>
                 </div>
-                <div class="form-group">
+                {{-- <div class="form-group">
                     <strong>Kraalid:</strong>
                     <input type="text" name="Kraalid" class="form-control" placeholder="Kraalid">
-                </div>
+                </div> --}}
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                 <button type="submit" class="btn btn-primary">Submit</button>

@@ -129,10 +129,6 @@ class ProjectController extends Controller
         $projectkraal = projectkraal::where('kraalid', $kraalid)->where('projectid', $projectid);
         $projectkraal->delete();
 
-        // projectkraal::where('kraalid', $id)->delete();
-        // DB::table('projectkraal')->where('kraalid', $id)->delete();
-        // $user = projectkraal::where('kraalid', $id)->firstorfail()->delete();
-        // echo ("Kraal deleted successfully.");
         return redirect()->route('projects.show', $projectid);
     }
     /**

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Kleur;
 use App\Models\Kleurtype;
 use App\Models\Kraal;
+use App\Http\Controllers\Input;
 use Illuminate\Support\Facades\Validator;
 
 class KleurenController extends Controller
@@ -31,7 +32,7 @@ class KleurenController extends Controller
      */
     public function create()
     {
-        //
+        return view('kleuren.createkleuren');
     }
 
     /**
@@ -48,20 +49,17 @@ class KleurenController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         }
+        if (Kleur::where('kleur', $request->kleur)->exists()) {
+            return back()->with('success', 'Deze kleur bestaat al');;
+        } else {
+            $kleur = new Kleur();
+            $kleur->hexa = $request->hexa;
+            $kleur->kleur = $request->kleur;
+            $kleur->save();
 
-        $kleur = new Kleur();
-        // dd($request->file('image'));
-        $kleur->hexa = $request->hexa;
-        $kleur->kleur = $request->kleur;
-
-
-        // $puzzel->own = $request->eigen;
-        // $puzzel->gelegd = $request->gelegd;
-        // $puzzel->image = $imageName;
-        $kleur->save();
-
-        return redirect()->route('kralen.createkleuren')
+            return redirect()->route('kleuren.index')
             ->with('success', 'Product created successfully.');
+        }
     }
 
     /**
