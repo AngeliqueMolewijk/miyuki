@@ -21,9 +21,9 @@ class KleurenController extends Controller
             ->join('kraals', 'kraals.id', '=', 'kleurtypes.kraalid')
             // ->where('kleurs.id', '=', $id)
             ->get();
-        $kleuren = Kleur::all();
+        // $kleuren = Kleur::orderBy('kleur', 'ASC')->get();
         // dd($kleurcollectie);
-        return redirect()->route('kleuren.show', '1');
+        return redirect()->route('kleuren.show', '2');
         // return view('kleuren.index', compact('kleuren', 'kleurcollectie'));
     }
 
@@ -79,9 +79,11 @@ class KleurenController extends Controller
             ->where('kleurs.id', '=', $id)
             // ->groupBy('kraals.id')
             ->get();
-        $kleuren = Kleur::all();
-        // dd($kleurcollectie);
-        return view('kleuren.show', compact('kleuren', 'kleurcollectie'));
+        $currentkleur = Kleur::findOrFail($id);
+
+        $kleuren = Kleur::orderBy('kleur', 'ASC')->get();
+        // dd($currentkleur);
+        return view('kleuren.show', compact('kleuren', 'kleurcollectie', 'currentkleur'));
     }
 
     /**

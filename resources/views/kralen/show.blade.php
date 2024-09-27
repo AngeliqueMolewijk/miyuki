@@ -71,11 +71,14 @@
                     </div>
                 </form>
             @endif
-
-            <h3>
-                <div class="mt-2">
-                    Kralen die in deze mix voorkomen1
-            </h3>
+            @php
+                $mixes = strpos($kraal->name, 'mix');
+            @endphp
+            @if ($mixes)
+                <h3>
+                    <div class="mt-2">
+                        Kralen die in deze mix voorkomen
+                </h3>
         </div>
     </div>
     <div class="container">
@@ -110,12 +113,24 @@
                 @endforeach
             </div>
         </div>
+        @endif
         <h3>
             Komt in deze kleuren voor: </h3>
         <div class="row mt-2">
             <div class="cardsgrid">
                 @foreach ($inkleurtypes as $inkleurintypeslos)
                     <div class="card mr-2" style="width: 10rem;">
+                        @if ($inkleurintypeslos->hexa != '#0')
+                            <a href="{{ route('kleuren.show', $inkleurintypeslos->id) }}">
+                                <div class="card_title h-50" style="background-color:{{ $inkleurintypeslos->hexa }}">
+                                </div>
+                            </a>
+                        @else
+                            <a href="{{ route('kleuren.show', $inkleurintypeslos->id) }}">
+                                <div><img src="{{ url('images/rainbow3.jpg') }}"></img>
+                                </div>
+                            </a>
+                        @endif
                         <div class="card_title" style="background-color:{{ $inkleurintypeslos->hexa }}">
                         </div>
                         <div class="card-footer">

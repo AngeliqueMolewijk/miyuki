@@ -9,30 +9,41 @@
         <div class="col-md-12">
             <div class="main">
                 <h1>Miyuki kralen</h1>
-                @foreach ($kleuren as $kleur)
-                    <div class="kleurenkaart">
-                        @if ($kleur->hexa != '#0')
-                            <a href="{{ route('kleuren.show', $kleur->id) }}">
-                                <div class="card_title h-50" style="background-color:{{ $kleur->hexa }}">
-                                </div>
-                            </a>
-                        @else
-                            <a href="{{ route('kleuren.show', $kleur->id) }}">
-                                <div><img src="{{ url('images/rainbow3.jpg') }}"></img>
-                                </div>
-                            </a>
-                        @endif
-                        {{ $kleur->kleur }}
-                    </div>
-                @endforeach
+                <table>
+
+                    @foreach ($kleuren->chunk(8) as $chunk)
+                        <tr>
+                            @foreach ($chunk as $kleur)
+                                <td>
+                                    <div class="kleurenkaart">
+                                        @if ($kleur->hexa != '#0')
+                                            <a href="{{ route('kleuren.show', $kleur->id) }}">
+                                                <div class="card_title h-50" style="background-color:{{ $kleur->hexa }}">
+                                                </div>
+                                            </a>
+                                        @else
+                                            <a href="{{ route('kleuren.show', $kleur->id) }}">
+                                                <div><img src="{{ url('images/rainbow3.jpg') }}"></img>
+                                                </div>
+                                            </a>
+                                        @endif
+                                        {{ $kleur->kleur }}
+                                    </div>
+                                </td>
+                            @endforeach
+                        </tr>
+                    @endforeach
+                </table>
             </div>
         </div>
     </div>
 
-    <div class="col-md-5">
-        <h3>In deze kleur komen de volgende kralen voor:</h3>
+    <div class="col-md-12">
+        <h3>In deze kleur komen de volgende kralen voor: {{ $currentkleur->kleur }}</h3>
+
         <div class="row mt-2">
             <div class="cardsgrid">
+
                 @foreach ($kleurcollectie as $collectie)
                     <div class="card mr-2" style="">
                         <a href="{{ route('kralen.show', $collectie->id) }}"><img class="card-img-top1"
