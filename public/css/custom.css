@@ -162,7 +162,9 @@ img {
       position: absolute;
       width: 1px;
     }
-    
+    table th{
+      display: none;
+    }
     table tr {
       border-bottom: 3px solid #ddd;
       display: block;
