@@ -143,7 +143,7 @@ img {
   align-items: center;
   }
 
-  @media screen and (max-width: 768) {
+  @media screen and (max-width: 500) {
     table {
       border: 0;
     }
@@ -163,7 +163,7 @@ img {
       width: 1px;
     }
     table th{
-      display: none !important ;   
+      display: none  ;   
     }
     table tr {
       border-bottom: 3px solid #ddd;
@@ -240,10 +240,45 @@ table td{
     color:#000!important;
   }
   
-  th {
+  /* table th {
     position: sticky;
-    top: 70px;  /* 0px if you don't have a navbar, but something is required */
-    background: white;
+    top: 0;  /* 0px if you don't have a navbar, but something is required */
+    /* background: white;
+  } */ 
+
+  /* .navbar{position:sticky; } */
+
+/* #sticktableheader{
+  position: sticky;top: 120px;
+  border: #000;
+  display: none;
+
+
+} */
+  #component{
+    scroll-margin-top: 50px;
+  }
+  /* .container{
+    margin-top: 100px;
+  } */
+
+  @media screen and (max-width: 600px) {
+    #sticktableheader 
+      {display:none;}
+    
   }
 
-  .navbar{position:sticky; top:10px;}
+
+@media all and (min-width: 600px) {
+    #sticktableheader {
+      display:block;
+      /* position: sticky; */
+      top:75px;
+    }
+}
+
+.card-deck {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+}

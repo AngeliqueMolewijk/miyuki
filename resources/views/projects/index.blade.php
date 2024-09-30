@@ -11,24 +11,20 @@
         <a href="{{ route('projects.create') }}" class="btn btn-info" role="button">Nieuw Project</a>
 
         <div class="cardsgrid">
-            {{-- <ul class="cards"> --}}
             @foreach ($projecten as $project)
-                {{-- @foreach ($chunk as $kraal) --}}
-                <div class="cards_item text-center">
-                    <div class="card">
-                        <div class="card-img-top"><a href="{{ route('projects.show', $project->id) }}"><img
-                                    src="{{ url('images/' . $project->image) }}"></a></div>
+                <div class="cards_item card-deck">
+                    <div class="card flex-fill">
+                        <div class="card-img-top ratio ratio-1x1"><a href="{{ route('projects.show', $project->id) }}">
+                                <img class="object-fit-contain" src="{{ url('images/' . $project->image) }}">
+                            </a>
+                        </div>
                         <div class="card-body">
-
-                            <div class="card_content">
-                                <h2 class="card_title">{{ $project->naam }}</h2>
-                            </div>
-                            <p class="card_text fw-bold">omschrijving:</p>
+                            <h4 class="card-title">{{ $project->naam }}</h4>
+                            <p class="card-title"></p>
                             {{ $project->omschrijving }}
                         </div>
                     </div>
                 </div>
             @endforeach
-            {{-- </ul> --}}
         </div>
     @endsection
