@@ -49,10 +49,26 @@
                     <input type="text" name="Kraalid" class="form-control" placeholder="Kraalid">
                 </div> --}}
             </div>
+
+
+            <select class="form-control" name="kraalid">
+                {{-- {{ Form::open(['action' => 'KralenController@storemix']) }} --}}
+                @foreach ($kralen as $kraal)
+                    <option value="{{ $kraal->id }}">
+                        {{ $kraal->nummer }} - {{ $kraal->name }}
+                    </option>
+                @endforeach
+                {{-- {{ Form::close() }} --}}
+
+            </select>
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                 <button type="submit" class="btn btn-primary">Submit</button>
             </div>
         </div>
+        {{-- <input type="hidden" name="projectid" value="{{ $project->id }}"> --}}
+        {{-- <div class="col-xs-12 col-sm-12 col-md-12 text-center mt-2">
+            <button type="submit" class="btn btn-primary">kralen aan project Toevoegen</button>
+        </div> --}}
 
     </form>
 

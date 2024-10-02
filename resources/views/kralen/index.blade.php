@@ -8,6 +8,10 @@
 
     <div class="main">
         <h1>Miyuki kralen</h1>
+        <a href="{{ route('kralen.create') }}" class="btn btn-info" role="button">Nieuw Kraal</a>
+        @sortablelink('stock', 'Stock')
+        @sortablelink('name', 'Naam')
+        @sortablelink('nummer', 'Nummer')
         <div class="cardsgrid">
             {{-- <ul class="cards"> --}}
             @foreach ($kralen as $kraal)

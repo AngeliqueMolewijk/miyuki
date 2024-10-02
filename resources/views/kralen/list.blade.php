@@ -2,8 +2,8 @@
 
 @section('content')
     <div class="row">
-        <div class="col-lg-12 col-sm-1 margin-tb">
-            <div class="pull-left">
+        <div class="col margin-tb">
+            <div class="">
                 <h2>Lijst met alle kralen</h2>
             </div>
             {{-- <div class="pull-right">
@@ -29,14 +29,15 @@
         <div class="row border bg-light mb-2 pb-2">
             {{-- <div></div>s --}}
             <div class="col-lg-1">Image</div>
-            <div class="col-lg-3 col-md-3">@sortablelink('name', 'Naam') </div>
-            <div class="col-lg-2 col-md-2"> @sortablelink('nummer', 'Nummer')</div>
+            <div class="col-lg-3 col-md-3">@sortablelink('name', trans('Naam'), ['filter' => 'active, visible'], ['class' => 'btn-block', 'rel' => 'nofollow'])</div>
+            <div class="col-lg-2 col-md-2"> @sortablelink('nummer', trans('Nummer'), ['filter' => 'active, visible'], ['class' => 'btn-block', 'rel' => 'nofollow'])</div>
             <div class="col-lg-1 col-md-1">zit in mix</div>
             {{-- <th width="10%">Voorraad</th> --}}
-            <div class="col-lg-1 col-md-1"> @sortablelink('stock', 'Voorraad')</div>
+            <div class="col-lg-1 col-md-1"> @sortablelink('stock', 'Stock')</div>
             <div class="col-lg-1 col-md-1">Aantal</div>
             <div class="col-lg-1 col-md-1">kies kleur</div>
             <div class="col-lg-1 col-md-1">in kleur</div>
+
         </div>
     </div>
     </tr>
@@ -50,6 +51,7 @@
                     {{-- </div> --}}
                     <div class="col-md-2 col-lg-1">
                         <div id='component{{ $kraal->id }}'>
+                            <div class="d-xs-block d-sm-block d-md-none  d-lg-none d-xl-none d-xxl-none">Image</div>
                             <a href="{{ route('kralen.show', $kraal->id) }}"><img src="{{ url('images/' . $kraal->image) }}"
                                     loading="lazy"></a>
 
@@ -57,6 +59,8 @@
                     </div>
                     <div class="col-md-5 col-lg-3">
                         <div class="form-group h6">
+                            <div class="d-xs-block d-sm-block d-md-none  d-lg-none d-xl-none d-xxl-none">Naam</div>
+
                             {{-- <strong>Name:</strong> --}}
                             <input type="text" name="name" class="form-control" placeholder="Name"
                                 value="{{ $kraal->name }}">
@@ -64,6 +68,8 @@
                     </div>
                     <div class="col-md-5 col-lg-2">
                         <div class="form-group">
+                            <div class="d-xs-block d-sm-block d-md-none  d-lg-none d-xl-none d-xxl-none">Nummer</div>
+
                             {{-- <strong>Nummer:</strong> --}}
                             <input type="text" name="nummer" class="form-control" placeholder="Nummer"
                                 value="{{ $kraal->nummer }}">
@@ -71,6 +77,8 @@
                     </div>
                     <div class="col-md-2 col-lg-1">
                         <div class="form-group">
+                            <div class="d-xs-block d-sm-block d-md-none  d-lg-none d-xl-none d-xxl-none">In mix</div>
+
                             @foreach ($mix as $kraleninmix)
                                 @if ($kraleninmix->kraalnr == $kraal->id)
                                     <a href="{{ route('kralen.show', $kraleninmix->mixnr) }}">
@@ -82,6 +90,8 @@
                     </div>
                     <div class="col-md-2 col-lg-1">
                         <div class="form-group">
+                            <div class="d-xs-block d-sm-block d-md-none  d-lg-none d-xl-none d-xxl-none">Voorraad gram</div>
+
                             {{-- <strong>stock:</strong> --}}
                             <input type="text" name="stock" class="form-control" placeholder="Stock"
                                 value="{{ $kraal->stock }}">
@@ -89,12 +99,18 @@
                     </div>
                     <div class="col-md-2 col-lg-1">
                         <div class="form-group">
+                            <div class="d-xs-block d-sm-block d-md-none  d-lg-none d-xl-none d-xxl-none">Voorraad aantal
+                            </div>
+
                             {{-- <strong>aantal:</strong> --}}
                             <input type="text" name="countstock" class="form-control" placeholder="countstock"
                                 value="{{ $kraal->stock * 200 }}"readonly>
                         </div>
                     </div>
                     <div class="col-md-2 col-lg-1">
+                        <div class="d-xs-block d-sm-block d-md-none  d-lg-none d-xl-none d-xxl-none">Aan kleurmix toevoegen
+                        </div>
+
                         <select name="kleurid">
                             <option value="Empty"></option>
                             @foreach ($kleuren as $kleur)
@@ -106,6 +122,8 @@
                     </div>
                     {{-- </div> --}}
                     <div class="col-md-2 col-lg-1">
+                        <div class="d-xs-block d-sm-block d-md-none  d-lg-none d-xl-none d-xxl-none">In kleurmix</div>
+
                         <div class="form-group">
                             @foreach ($kleurcollectie as $kleuritem)
                                 @if ($kleuritem->kraalid == $kraal->id)

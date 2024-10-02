@@ -262,23 +262,39 @@ table td{
     margin-top: 100px;
   } */
 
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 775px) {
     #sticktableheader 
       {display:none;}
+
+    /* #titlelist{
+      display: block;
+    } */
     
   }
 
 
-@media all and (min-width: 600px) {
+@media screen and (min-width: 775px) {
     #sticktableheader {
       display:block;
       /* position: sticky; */
       top:75px;
     }
+    /* #titlelist{
+      display: none;
+  } */
 }
 
 .card-deck {
   display: flex;
   flex-wrap: wrap;
   align-items: stretch;
+}
+
+.classaactive{
+  color: black;
+  text-decoration: none;
+}
+.classaactive:hover, a:focus {
+  color: black;
+  text-decoration: none;
 }

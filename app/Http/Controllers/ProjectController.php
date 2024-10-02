@@ -8,6 +8,7 @@ use App\Models\projectkraal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
+use Laravel\Prompts\Prompt;
 
 class ProjectController extends Controller
 {
@@ -26,7 +27,8 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view('projects.create');
+        $kralen = Kraal::all();
+        return view('projects.create', compact('kralen'));
     }
 
     /**
@@ -66,6 +68,13 @@ class ProjectController extends Controller
         // $puzzel->gelegd = $request->gelegd;
         // $puzzel->image = $imageName;
         $project->save();
+
+        $insertedId = $project->id;
+        $projectkraal = new projectkraal();
+        $projectkraal->kraalid = $request->kraalid;
+        $projectkraal->projectid = $insertedId;
+        $projectkraal->save();
+
         return redirect()->route('projects.create')
             ->with('success', 'Product created successfully.');
     }
@@ -115,8 +124,6 @@ class ProjectController extends Controller
     public function storekraalproject(Request $request)
     {
         $projectkraal = new projectkraal();
-        // dd($request);
-        // $Mix->name = $request->title;
         $projectkraal->kraalid = $request->kraalid;
         $projectkraal->projectid = $request->projectid;
 

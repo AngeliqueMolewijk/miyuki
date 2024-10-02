@@ -15,7 +15,7 @@ return [
             'class' => 'fa fa-sort-amount',
         ],
         'numeric' => [
-            'rows'  => ['created_at', 'updated_at', 'level', 'id', 'phone_number'],
+            'rows'  => ['created_at', 'updated_at', 'level', 'id', 'phone_number', 'nummer'],
             'class' => 'fa fa-sort-numeric',
         ],
     ],
@@ -38,7 +38,7 @@ return [
     /*
     generated icon is clickable non-clickable (default)
      */
-    'clickable_icon'                => false,
+    'clickable_icon'                => true,
 
     /*
     icon and text separator (any string)
@@ -59,12 +59,12 @@ return [
     /*
     default anchor class, if value is null none is added
      */
-    'anchor_class'                  => null,
+    'anchor_class'                  => "classaactive",
 
     /*
     default active anchor class, if value is null none is added
      */
-    'active_anchor_class'           => null,
+    'active_anchor_class'           => "classaactive",
 
     /*
     default sort direction anchor class, if value is null none is added
@@ -84,7 +84,7 @@ return [
     /*
     apply formatting function to custom titles as well as column names
      */
-    'format_custom_titles'          => true,
+    'format_custom_titles'          => false,
 
     /*
     inject title parameter in query strings, use null to turn injection off

@@ -26,12 +26,10 @@
     <div class="card">
         <div class="row">
             <div class="col-md-2" style="padding-left: 0px;  padding-right: 0px;">
-                <img class="card-img-top" src="{{ url('images/' . $project->image) }}" alt="Italian Trulli" width="500px"
-                    height="500px">
+                <img class="card-img-top" src="{{ url('images/' . $project->image) }}">
             </div>
             <div class="col-md-2" style="padding-left: 0px;  padding-right: 0px;">
-                <img class="card-img-top" src="{{ url('images/' . $project->image2) }}" alt="Italian Trulli" width="500px"
-                    height="500px">
+                <img class="card-img-top" src="{{ url('images/' . $project->image2) }}">
             </div>
             <div class="col-sm-9 col-md-8">
                 <form action="{{ route('projects.update', $project->id) }}" method="POST" enctype="multipart/form-data">

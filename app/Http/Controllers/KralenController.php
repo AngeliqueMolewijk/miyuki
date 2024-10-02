@@ -16,7 +16,7 @@ class KralenController extends Controller
 {
     public function index()
     {
-        $kralen = Kraal::all();
+        $kralen = Kraal::sortable(['stock' => 'desc'])->get();
         $aantalmix = Mix::all();
         return view('kralen.index', compact('kralen', 'aantalmix'));
     }
@@ -122,8 +122,8 @@ class KralenController extends Controller
             ->get();
         // dd($kraleninmix);
         $inkleurtypes = kleurtype::Join('kleurs', 'kleurs.id', '=', 'kleurtypes.kleurid')
-        // ->join('kleurs', 'kleurs.id', '=', 'kleurtypes.kleurid')
-        ->where('kleurtypes.kraalid', '=', $id)
+            // ->join('kleurs', 'kleurs.id', '=', 'kleurtypes.kleurid')
+            ->where('kleurtypes.kraalid', '=', $id)
             ->get();
         // dd($inkleurtypes);
         return view('kralen.show', compact('kraal', 'mixkiezen', 'kraleninmix', 'inkleurtypes'));
@@ -148,7 +148,7 @@ class KralenController extends Controller
         // dd($data);
 
         $kraleninmix = Mix::Join('kraals', 'kraals.id', '=', 'mixes.kraalnr')
-        ->where('mixes.mixnr', '=', $id)
+            ->where('mixes.mixnr', '=', $id)
             ->get();
         // dd($kleurcollectie);
         // dd($kleurcollectie);
