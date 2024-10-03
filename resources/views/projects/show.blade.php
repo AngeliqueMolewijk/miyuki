@@ -40,8 +40,16 @@
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <a href="{{ route('projects.edit', $project->id) }}" class="btn btn-primary" role="button"
-                                aria-pressed="true">Edit</a>
+                            {{-- <a href="{{ route('projects.edit', $project->id) }}" class="btn btn-primary" role="button"
+                                aria-pressed="true">Edit</a> --}}
+
+                            <form action="{{ route('projects.destroy', $project->id) }}" method="post">
+                                @csrf
+                                @method('DELETE')
+                                <a class="btn btn-primary" href="{{ route('projects.edit', $project->id) }}">Edit</a>
+                                <button type="submit" class="btn btn-danger"
+                                    onclick="return confirm('Do you want to delete this product?');">Delete project</button>
+                            </form>
                         </div>
                     </div>
                 </div>

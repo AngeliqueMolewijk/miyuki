@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>Edit Product</h2>
+                <h2>Edit Project</h2>
             </div>
             <div class="pull-right">
                 <a class="btn btn-primary" href="{{ route('projects.index') }}"> Back</a>
@@ -62,22 +62,25 @@
         </div>
     </div>
     <form action="{{ url('/storekraalproject') }}" method="POST" enctype="multipart/form-data">
-        @csrf
         <select class="form-control" name="kraalid">
-            {{-- {{ Form::open(['action' => 'KralenController@storemix']) }} --}}
-            @foreach ($kralen as $kraal)
-                <option value="{{ $kraal->id }}">
-                    {{ $kraal->nummer }} - {{ $kraal->name }}
-                </option>
-            @endforeach
-            {{-- {{ Form::close() }} --}}
+            @csrf
+            <select class="form-control" name="kraalid">
+                <option value="null" selected>Please select one option</option>
 
-        </select>
+                {{-- {{ Form::open(['action' => 'KralenController@storemix']) }} --}}
+                @foreach ($kralen as $kraal)
+                    <option value="{{ $kraal->id }}">
+                        {{ $kraal->nummer }} - {{ $kraal->name }}
+                    </option>
+                @endforeach
+                {{-- {{ Form::close() }} --}}
 
-        <input type="hidden" name="projectid" value="{{ $project->id }}">
-        <div class="col-xs-12 col-sm-12 col-md-12 text-center mt-2">
-            <button type="submit" class="btn btn-primary">kralen aan project Toevoegen</button>
-        </div>
+            </select>
+
+            <input type="hidden" name="projectid" value="{{ $project->id }}">
+            <div class="col-xs-12 col-sm-12 col-md-12 text-center mt-2">
+                <button type="submit" class="btn btn-primary">kralen aan project Toevoegen</button>
+            </div>
     </form>
     <div class="col-md-12">
         <div class="row mt-2">

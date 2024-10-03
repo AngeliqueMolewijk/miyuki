@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Laravel\Prompts\Prompt;
+use SebastianBergmann\Type\NullType;
 
 class ProjectController extends Controller
 {
@@ -70,11 +71,12 @@ class ProjectController extends Controller
         $project->save();
 
         $insertedId = $project->id;
-        $projectkraal = new projectkraal();
-        $projectkraal->kraalid = $request->kraalid;
-        $projectkraal->projectid = $insertedId;
-        $projectkraal->save();
-
+        if ($request->kraalid != 'null') {
+            $projectkraal = new projectkraal();
+            $projectkraal->kraalid = $request->kraalid;
+            $projectkraal->projectid = $insertedId;
+            $projectkraal->save();
+        }
         return redirect()->route('projects.create')
             ->with('success', 'Product created successfully.');
     }
@@ -179,7 +181,11 @@ class ProjectController extends Controller
      */
     public function destroy(string $id)
     {
+        // dd($id);
+        $project = Project::where('id', $id);
         $project->delete();
+        $projectkraal = projectkraal::where('projectid', $id);
+        $projectkraal->delete();
 
         return redirect()->route('projects.index')
             ->with('success', 'Puzzel deleted successfully');

@@ -52,6 +52,8 @@
 
 
             <select class="form-control" name="kraalid">
+                <option value="null" selected>Please select one option</option>
+
                 {{-- {{ Form::open(['action' => 'KralenController@storemix']) }} --}}
                 @foreach ($kralen as $kraal)
                     <option value="{{ $kraal->id }}">
