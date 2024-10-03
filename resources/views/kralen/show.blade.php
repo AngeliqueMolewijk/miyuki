@@ -1,6 +1,6 @@
 @extends('kralen.layout')
 @section('content')
-    <div class="container">
+    <div class="container ">
         <div class="row">
             <div class="col-lg-12 margin-tb">
                 <div class="pull-left">
@@ -11,12 +11,15 @@
                 </div> --}}
             </div>
         </div>
-        <div class="card">
+        <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+
+        <div class="card ">
             <div class="row">
                 <div class="col-sm-3">
-                    <img class="card-img-top" src="{{ url('images/' . $kraal->image) }}" alt="Italian Trulli" width="200px">
+                    <img class="card-img-top" src="{{ url('images/' . $kraal->image) }}" alt="Italian Trulli"
+                        width="200px">
                 </div>
-                <div class="col-sm-8 my-element">
+                <div class="col-sm-4 my-element">
                     <div class="row ">
                         <div class="col-md-12">
                             <div class="form-group">
@@ -48,10 +51,49 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-sm-4 ">
+                    <div class="row mt-2">
+                        <a href="#kleureninmixlink" class="btn btn-primary mb-2" tabindex="-1" role="button"
+                            aria-disabled="true">Kleuren in mix</a>
+                        <a href="#inkleurtype" class="btn btn-primary mb-2" tabindex="-1" role="button"
+                            aria-disabled="true">In
+                            kleurtype</a>
+                        <a href="#linktoprojecten" class="btn btn-primary" tabindex="-1" role="button"
+                            aria-disabled="true">Projecten</a>
+                        {{-- <a href="#kleureninmixlink"><button type="button" class="btn btn-secondary">Kleuren in
+                                mix</button></a>
+                        <a href="#linktoprojecten"><button type="button" class="btn btn-secondary"
+                                id="kleureninmixlink">Projecten</button></a> --}}
+                        {{-- <div class="cardsgrid">
+                            @foreach ($inkleurtypes as $inkleurintypeslos)
+                                <div class="card mr-2" style="width: 10rem;">
+                                    @if ($inkleurintypeslos->hexa != '#0')
+                                        <a href="{{ route('kleuren.show', $inkleurintypeslos->id) }}">
+                                            <div class="card_title h-50"
+                                                style="background-color:{{ $inkleurintypeslos->hexa }}">
+                                            </div>
+                                        </a>
+                                    @else
+                                        <a href="{{ route('kleuren.show', $inkleurintypeslos->id) }}">
+                                            <div><img src="{{ url('images/rainbow3.jpg') }}"></img>
+                                            </div>
+                                        </a>
+                                    @endif
+                                    <div class="card_title" style="background-color:{{ $inkleurintypeslos->hexa }}">
+                                    </div>
+                                    <div class="card-footer">
+                                        <small class="text-muted">Kleur: {{ $inkleurintypeslos->kleur }}</small>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div> --}}
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="card">
-            @if (strpos($kraal->name, '%mix%'))
+
+        @if (strpos($kraal->name, '%mix%'))
+            <div class="card">
                 <form action="{{ url('/storemix') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <select class="form-control" name="kraalid">
@@ -70,75 +112,102 @@
                         <button type="submit" class="btn btn-primary">kralen aan mix Toevoegen</button>
                     </div>
                 </form>
-            @endif
-            @php
-                $mixes = strpos($kraal->name, 'mix');
-            @endphp
-            @if ($mixes)
+            </div>
+        @endif
+
+
+        {{-- </div> --}}
+
+        @php
+            $mixes = strpos($kraal->name, 'mix');
+        @endphp
+        @if ($mixes)
+            <div class="row">
                 <h3>
-                    <div class="mt-2">
+                    <div class="mt-2"id="kleureninmixlink">
                         Kralen die in deze mix voorkomen
                 </h3>
-        </div>
-    </div>
-    <div class="container">
-        <div class="row mt-2">
-            <div class="cardsgrid">
-                @foreach ($kraleninmix as $kraalchunck)
-                    {{-- @foreach ($kralenmix as $kraalchunck) --}}
-                    <div class="card mr-2" style="">
-                        <a href="{{ route('kralen.show', $kraalchunck->id) }}"><img class="card-img-top1"
-                                src="{{ url('images/' . $kraalchunck->image) }}"></a>
-                        <div class="card-body">
-                            <h5 class="card-title"> {{ $kraalchunck->name }}</h5>
-                            <h5 class="card-title"> Nummer: {{ $kraalchunck->nummer }}</h5>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-muted">Voorraad: {{ $kraalchunck->stock }} gram</small>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-muted">Aantal: {{ $kraalchunck->stock * 200 }} stuks</small>
-                        </div>
-                        <form
-                            action="{{ route('delete-from-mix', ['mixid' => $kraalchunck->mixnr, 'kraalid' => $kraalchunck->id]) }}"
-                            method="get">
-                            <a class="btn btn-info" href="{{ route('kralen.show', $kraalchunck->id) }}">Show</a>
-                            <a class="btn btn-primary" href="{{ route('kralen.edit', $kraalchunck->id) }}">Edit</a>
-                            <button type="submit" class="btn btn-danger"
-                                onclick="return confirm('Do you want to delete this product?');">Delete from
-                                mix</button>
-                        </form>
+                <div class="row mt-2">
+                    <div class="cardsgrid">
+                        @foreach ($kraleninmix as $kraalchunck)
+                            {{-- @foreach ($kralenmix as $kraalchunck) --}}
+                            <div class="card mr-2" style="">
+                                <a href="{{ route('kralen.show', $kraalchunck->id) }}"><img class="card-img-top1"
+                                        src="{{ url('images/' . $kraalchunck->image) }}"></a>
+                                <div class="card-body">
+                                    <h5 class="card-title"> {{ $kraalchunck->name }}</h5>
+                                    <h5 class="card-title"> Nummer: {{ $kraalchunck->nummer }}</h5>
+                                </div>
+                                <div class="card-footer">
+                                    <small class="text-muted">Voorraad: {{ $kraalchunck->stock }} gram</small>
+                                </div>
+                                <div class="card-footer">
+                                    <small class="text-muted">Aantal: {{ $kraalchunck->stock * 200 }} stuks</small>
+                                </div>
+                                <form
+                                    action="{{ route('delete-from-mix', ['mixid' => $kraalchunck->mixnr, 'kraalid' => $kraalchunck->id]) }}"
+                                    method="get">
+                                    <a class="btn btn-info" href="{{ route('kralen.show', $kraalchunck->id) }}">Show</a>
+                                    <a class="btn btn-primary" href="{{ route('kralen.edit', $kraalchunck->id) }}">Edit</a>
+                                    <button type="submit" class="btn btn-danger"
+                                        onclick="return confirm('Do you want to delete this product?');">Delete from
+                                        mix</button>
+                                </form>
+                            </div>
+                            {{-- @endforeach --}}
+                        @endforeach
                     </div>
-                    {{-- @endforeach --}}
+                </div>
+            </div>
+        @endif
+
+        <div class="row mt-2" id="linktoprojecten">
+            <h3> projecten </h3>
+            <div class="cardsgrid">
+
+                @foreach ($projecten as $project)
+                    <div class="card mr-2" style="width: 10rem;">
+                        <a href="{{ route('projects.show', $project->id) }}"><img class="card-img-top1"
+                                src="{{ url('images/' . $project->image) }}"></a>
+                        {{-- <div class="card_title" style="background-color:{{ $inkleurintypeslos->hexa }}"> --}}
+
+                        <div class="card-footer">
+                            <small class="text-muted">Kleur: {{ $project->name }}</small>
+                        </div>
+                    </div>
+                    {{-- </div> --}}
+                    {{-- {{ $project->naam }} --}}
                 @endforeach
             </div>
         </div>
-        @endif
+        {{-- </div> --}}
         <h3>
             Komt in deze kleuren voor: </h3>
-        <div class="row mt-2">
+        <div class="row mt-2" id="inkleurtype">
             <div class="cardsgrid">
                 @foreach ($inkleurtypes as $inkleurintypeslos)
                     <div class="card mr-2" style="width: 10rem;">
                         @if ($inkleurintypeslos->hexa != '#0')
                             <a href="{{ route('kleuren.show', $inkleurintypeslos->id) }}">
-                                <div class="card_title h-50" style="background-color:{{ $inkleurintypeslos->hexa }}">
+                                {{-- <div class="card_title h-50" style="background-color:{{ $inkleurintypeslos->hexa }}"> --}}
+                                <div class="card_title" style="background-color:{{ $inkleurintypeslos->hexa }}">
                                 </div>
                             </a>
                         @else
                             <a href="{{ route('kleuren.show', $inkleurintypeslos->id) }}">
-                                <div><img src="{{ url('images/rainbow3.jpg') }}"></img>
+                                <div><img src="{{ url('images/rainbow2.jpg') }}"></img>
                                 </div>
                             </a>
                         @endif
-                        <div class="card_title" style="background-color:{{ $inkleurintypeslos->hexa }}">
-                        </div>
+                        {{-- <div class="card_title" style="background-color:{{ $inkleurintypeslos->hexa }}">
+                        </div> --}}
                         <div class="card-footer">
                             <small class="text-muted">Kleur: {{ $inkleurintypeslos->kleur }}</small>
                         </div>
                     </div>
                 @endforeach
             </div>
+            {{-- </div> --}}
         </div>
     </div>
 @endsection

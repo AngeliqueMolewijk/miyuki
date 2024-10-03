@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Kraal;
 use App\Models\Mix;
 use App\Models\Kleurtype;
-
+use App\Models\Project;
 use Illuminate\Support\Facades\Validator;
 
 use Redirect;
@@ -115,6 +115,10 @@ class KralenController extends Controller
     {
         $kraal = Kraal::findOrFail($id);
 
+        $projecten = Project::rightJoin('projectkraals', 'projectkraals.projectid', '=', 'projects.id')
+        ->where('projectkraals.kraalid', '=', $id)
+            ->get();
+
         $mixkiezen = Kraal::where('nummer', 'not like', '%mix%')->orderBy('nummer', 'ASC')->get();
 
         $kraleninmix = Mix::Join('kraals', 'kraals.id', '=', 'mixes.kraalnr')
@@ -126,7 +130,7 @@ class KralenController extends Controller
             ->where('kleurtypes.kraalid', '=', $id)
             ->get();
         // dd($inkleurtypes);
-        return view('kralen.show', compact('kraal', 'mixkiezen', 'kraleninmix', 'inkleurtypes'));
+        return view('kralen.show', compact('kraal', 'mixkiezen', 'kraleninmix', 'inkleurtypes', 'projecten'));
     }
 
     /**

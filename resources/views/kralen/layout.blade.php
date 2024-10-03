@@ -17,7 +17,8 @@
     <link rel="stylesheet" href="{{ asset('css/grid.css') }}">
     <link rel="stylesheet" href="{{ asset('css/clickgrid.css') }}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script type="text/javascript" src="{{ asset('js/clickgrid.js') }}"></script>
+    {{-- <script type="text/javascript" src="{{ asset('js/clickgrid.js') }}"></script> --}}
+
     {{-- <link rel="stylesheet" href="{{ asset('css/cards.css') }}"> --}}
 
 </head>
@@ -36,3 +37,4 @@
 
 </html>
 <script type="text/javascript" src="{{ asset('js/clickgrid.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/buttontotop.js') }}"></script>
