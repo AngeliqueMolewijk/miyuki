@@ -22,7 +22,7 @@ class KralenController extends Controller
     }
     public function opvoorraad()
     {
-        $kralen = Kraal::where('stock', '>', 0)->get();
+        $kralen = Kraal::sortable(['stock' => 'desc'])->where('stock', '>', 0)->get();
         $aantalmix = Mix::all();
         return view('kralen.index', compact('kralen', 'aantalmix'));
     }

@@ -10,7 +10,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('kralen.index') }}">Kralen</a>
                 </li>
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="nav-link" href="{{ url('/searchmix') }}">Mix</a>
                 </li>
                 <li class="nav-item">
@@ -18,7 +18,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('/opvoorraad') }}">Op voorraad</a>
-                </li>
+                </li> --}}
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('/kleuren') }}">Kleuren</a>
                 </li>
@@ -31,14 +31,12 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('projects.create') }}">Nieuw project</a>
                 </li> --}}
-
-
-                <form action="{{ url('/search') }}" method="POST" class="d-flex">
-                    @csrf
-                    <input class="form-control me-2" type="search" name="search"placeholder="Search"
-                        aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
+            </ul>
+            <form action="{{ url('/search') }}" method="POST" class="d-flex">
+                @csrf
+                <input class="form-control me-2" type="search" name="search"placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
         </div>
-    </div>
+    </div>  
 </nav>

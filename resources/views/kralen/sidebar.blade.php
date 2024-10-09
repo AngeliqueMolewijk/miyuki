@@ -31,7 +31,7 @@
                 </ul>
             </div>
         </li>
-        @if (request()->is('kralen*') or request()->is('searchmix*') or request()->is('list*'))
+        @if (request()->is('kralen*') or request()->is('searchmix*') or request()->is('list*') or request()->is('opvoorraad*'))
             <li class="mb-1">
                 <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
                     data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="true">
@@ -84,25 +84,27 @@
                 </div>
             </li>
         @endif
-
-        {{-- <li class="border-top my-3"></li>
-        <li class="mb-1">
-            <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
-                data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
-                Account
-            </button>
-            <div class="collapse" id="account-collapse">
-                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                    <li><a href="#"
-                            class="link-body-emphasis d-inline-flex text-decoration-none rounded">New...</a></li>
-                    <li><a href="#"
-                            class="link-body-emphasis d-inline-flex text-decoration-none rounded">Profile</a></li>
-                    <li><a href="#"
-                            class="link-body-emphasis d-inline-flex text-decoration-none rounded">Settings</a></li>
-                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Sign
-                            out</a></li>
-                </ul>
-            </div>
-        </li> --}}
+        @if (request()->is('kralen*') or request()->is('searchmix*') or request()->is('list*') or request()->is('opvoorraad*'))
+            <li class="border-top my-3"></li>
+            <li class="mb-1">
+                <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+                    data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="treu">
+                    Kralen
+                </button>
+                <div class="collapse show" id="account-collapse">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                        <li><a href="{{ url('/searchmix') }}"
+                                class="link-body-emphasis d-inline-flex text-decoration-none rounded">Mix</a></li>
+                        <li><a href={{ url('/list') }}
+                                class="link-body-emphasis d-inline-flex text-decoration-none rounded">List</a></li>
+                        <li><a href={{ url('/opvoorraad') }}
+                                class="link-body-emphasis d-inline-flex text-decoration-none rounded">Op voorraad</a>
+                        </li>
+                        {{-- <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Sign
+                                out</a></li> --}}
+                    </ul>
+                </div>
+            </li>
+        @endif
     </ul>
 </div>
