@@ -109,7 +109,7 @@
                     </select>
 
                     <input type="hidden" name="mixid" value="{{ $kraal->id }}">
-                    <div class="">
+                    <div class="mt-2">
                         <button type="submit" class="btn btn-primary">kralen aan mix Toevoegen</button>
                     </div>
                 </form>

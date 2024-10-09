@@ -5,6 +5,7 @@
             <p>{{ $message }}</p>
         </div>
     @endif
+    <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
     <div class="row">
         <div class="col-md-12">
             <div class="main">
@@ -18,12 +19,12 @@
                             <div class="col">
                                 <div class="kleurenkaart">
                                     @if ($kleur->hexa != '#0')
-                                        <a href="{{ route('kleuren.show', $kleur->id) }}">
+                                        <a href="{{ route('kleuren.show', $kleur->id) }}#anchor-kleuren">
                                             <div class="card_title h-50" style="background-color:{{ $kleur->hexa }}">
                                             </div>
                                         </a>
                                     @else
-                                        <a href="{{ route('kleuren.show', $kleur->id) }}">
+                                        <a href="{{ route('kleuren.show', $kleur->id) }}#anchor-kleuren">
                                             <div><img src="{{ url('images/rainbow3.jpg') }}"></img>
                                             </div>
                                         </a>
@@ -46,7 +47,7 @@
             <div class="cardsgrid">
 
                 @foreach ($kleurcollectie as $collectie)
-                    <div class="card mr-2" style="">
+                    <div id="anchor-kleuren" class="card mr-2" style="">
                         <a href="{{ route('kralen.show', $collectie->id) }}"><img class="card-img-top1"
                                 src="{{ url('images/' . $collectie->image) }}"></a>
                         <div class="card-body">

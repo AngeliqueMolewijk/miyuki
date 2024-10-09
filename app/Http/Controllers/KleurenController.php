@@ -67,22 +67,16 @@ class KleurenController extends Controller
      */
     public function show(string $id)
     {
-        // $results = kleurtype::Join('kleurs', 'kleurtypes.kleurid', '=', 'kleurs.id')
-        //     ->join('kraals', 'kraals.id', '=', 'kleurtypes.kraalid')
-        //     ->where('kleurs.id', '=', $id)
-        //     ->get();
+
 
 
         $kleurcollectie = kleurtype::Join('kleurs', 'kleurtypes.kleurid', '=', 'kleurs.id')
             ->join('kraals', 'kraals.id', '=', 'kleurtypes.kraalid')
-            // ->join('mixes', 'mixes.kraalnr', '=', 'kraals.id')
             ->where('kleurs.id', '=', $id)
-            // ->groupBy('kraals.id')
             ->get();
         $currentkleur = Kleur::findOrFail($id);
 
         $kleuren = Kleur::orderBy('kleur', 'ASC')->get();
-        // dd($currentkleur);
         return view('kleuren.show', compact('kleuren', 'kleurcollectie', 'currentkleur'));
     }
 

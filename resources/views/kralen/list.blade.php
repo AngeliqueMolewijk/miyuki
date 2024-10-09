@@ -6,12 +6,9 @@
             <div class="">
                 <h2>Lijst met alle kralen</h2>
             </div>
-            {{-- <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('kralen.index') }}"> Back</a>
-            </div> --}}
         </div>
     </div>
-
+    <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
     @if ($errors->any())
         <div class="alert alert-danger">
             <strong>Whoops!</strong> There were some problems with your input.<br><br>
@@ -22,229 +19,127 @@
             </ul>
         </div>
     @endif
-    {{-- @sortablelink('stock') --}}
-
-    {{-- div grid css to test table  --}}
-    <div class="container sticky-top" id="sticktableheader">
+    {{-- <div class="container sticky-top" id="sticktableheader">
         <div class="row border bg-light mb-2 pb-2">
-            {{-- <div></div>s --}}
             <div class="col-lg-1">Image</div>
             <div class="col-lg-3 col-md-3">@sortablelink('name', trans('Naam'), ['filter' => 'active, visible'], ['class' => 'btn-block', 'rel' => 'nofollow'])</div>
             <div class="col-lg-2 col-md-2"> @sortablelink('nummer', trans('Nummer'), ['filter' => 'active, visible'], ['class' => 'btn-block', 'rel' => 'nofollow'])</div>
             <div class="col-lg-1 col-md-1">zit in mix</div>
-            {{-- <th width="10%">Voorraad</th> --}}
             <div class="col-lg-1 col-md-1"> @sortablelink('stock', 'Stock')</div>
             <div class="col-lg-1 col-md-1">Aantal</div>
             <div class="col-lg-1 col-md-1">kies kleur</div>
             <div class="col-lg-1 col-md-1">in kleur</div>
-
         </div>
-    </div>
+    </div> --}}
     </tr>
     <div class="container">
         @foreach ($kralen as $kraal)
-            {{-- <div> --}}
             <form action="{{ route('kralen.update', $kraal->id) }}" #anchor method="POST" enctype="multipart/form-data">
                 @method('PUT')
                 @csrf
-                <div class="row">
-                    {{-- </div> --}}
-                    <div class="col-md-2 col-lg-1">
-                        <div id='component{{ $kraal->id }}'>
-                            <div class="d-xs-block d-sm-block d-md-none  d-lg-none d-xl-none d-xxl-none">Image</div>
-                            <a href="{{ route('kralen.show', $kraal->id) }}"><img src="{{ url('images/' . $kraal->image) }}"
-                                    loading="lazy"></a>
-
-                        </div>
-                    </div>
-                    <div class="col-md-5 col-lg-3">
-                        <div class="form-group h6">
-                            <div class="d-xs-block d-sm-block d-md-none  d-lg-none d-xl-none d-xxl-none">Naam</div>
-
-                            {{-- <strong>Name:</strong> --}}
-                            <input type="text" name="name" class="form-control" placeholder="Name"
-                                value="{{ $kraal->name }}">
-                        </div>
-                    </div>
-                    <div class="col-md-5 col-lg-2">
-                        <div class="form-group">
-                            <div class="d-xs-block d-sm-block d-md-none  d-lg-none d-xl-none d-xxl-none">Nummer</div>
-
-                            {{-- <strong>Nummer:</strong> --}}
-                            <input type="text" name="nummer" class="form-control" placeholder="Nummer"
-                                value="{{ $kraal->nummer }}">
-                        </div>
-                    </div>
-                    <div class="col-md-2 col-lg-1">
-                        <div class="form-group">
-                            <div class="d-xs-block d-sm-block d-md-none  d-lg-none d-xl-none d-xxl-none">In mix</div>
-
-                            @foreach ($mix as $kraleninmix)
-                                @if ($kraleninmix->kraalnr == $kraal->id)
-                                    <a href="{{ route('kralen.show', $kraleninmix->mixnr) }}">
-                                        {{ $kraleninmix->mixnr }} {{ ',' }}
-                                    </a>
-                                @endif
-                            @endforeach
-                        </div>
-                    </div>
-                    <div class="col-md-2 col-lg-1">
-                        <div class="form-group">
-                            <div class="d-xs-block d-sm-block d-md-none  d-lg-none d-xl-none d-xxl-none">Voorraad gram</div>
-
-                            {{-- <strong>stock:</strong> --}}
-                            <input type="text" name="stock" class="form-control" placeholder="Stock"
-                                value="{{ $kraal->stock }}">
-                        </div>
-                    </div>
-                    <div class="col-md-2 col-lg-1">
-                        <div class="form-group">
-                            <div class="d-xs-block d-sm-block d-md-none  d-lg-none d-xl-none d-xxl-none">Voorraad aantal
+                <div class="card">
+                    <div class="row mb-2">
+                        <div class="col-lg-4">
+                            <div class="col-md-2 col-lg-12">
+                                <div id='component{{ $kraal->id }}'>
+                                    <div class="d-xs-block d-sm-block d-md-none  d-lg-none d-xl-none d-xxl-none">Image</div>
+                                    <a href="{{ route('kralen.show', $kraal->id) }}"><img
+                                            src="{{ url('images/' . $kraal->image) }}" loading="lazy"></a>
+                                </div>
                             </div>
-
-                            {{-- <strong>aantal:</strong> --}}
-                            <input type="text" name="countstock" class="form-control" placeholder="countstock"
-                                value="{{ $kraal->stock * 200 }}"readonly>
                         </div>
-                    </div>
-                    <div class="col-md-2 col-lg-1">
-                        <div class="d-xs-block d-sm-block d-md-none  d-lg-none d-xl-none d-xxl-none">Aan kleurmix toevoegen
-                        </div>
+                        <div class="col-lg-8">
+                            <div class="card">
+                                <div class="row">
+                                    <div class="col-md-5 col-lg-8">
+                                        <div class="form-group h6">
+                                            <div class="">Naam
+                                                <input type="text" name="name" class="form-control" placeholder="Name"
+                                                    value="{{ $kraal->name }}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5 col-lg-4">
+                                        <div class="form-group">
+                                            <div class="">Nummer
+                                            </div>
+                                            <input type="text" name="nummer" class="form-control" placeholder="Nummer"
+                                                value="{{ $kraal->nummer }}">
+                                        </div>
+                                    </div>
 
-                        <select name="kleurid">
-                            <option value="Empty"></option>
-                            @foreach ($kleuren as $kleur)
-                                <option value="{{ $kleur->id }}"
-                                    {{ $kleur->kleur == $kraal->kleur ? 'selected' : '' }}>
-                                    {{ $kleur->kleur }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    {{-- </div> --}}
-                    <div class="col-md-2 col-lg-1">
-                        <div class="d-xs-block d-sm-block d-md-none  d-lg-none d-xl-none d-xxl-none">In kleurmix</div>
+                                    <div class="col-md-2 col-lg-4">
+                                        <div class="form-group">
+                                            <div class="">Voorraad
+                                                gram
+                                            </div>
+                                            <input type="text" name="stock" class="form-control" placeholder="Stock"
+                                                value="{{ $kraal->stock }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 col-lg-4">
+                                        <div class="form-group">
+                                            <div class="">Voorraad
+                                                aantal
+                                            </div>
+                                            <input type="text" name="countstock" class="form-control"
+                                                placeholder="countstock" value="{{ $kraal->stock * 200 }}"readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 col-lg-4">
+                                        <div class="">Aan kleurmix
+                                        </div>
 
-                        <div class="form-group">
-                            @foreach ($kleurcollectie as $kleuritem)
-                                @if ($kleuritem->kraalid == $kraal->id)
-                                    <a href="{{ route('kleuren.show', $kleuritem->kleurid) }}">
-                                        <p> {{ $kleuritem->kleur }}</p>
-                                    </a>
-                                @endif
-                            @endforeach
-                        </div>
-                    </div>
-                    <div class="col-md-2 col-lg-1">
-                        <div class="text-center">
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                                        <select name="kleurid">
+                                            <option value="Empty"></option>
+                                            @foreach ($kleuren as $kleur)
+                                                <option value="{{ $kleur->id }}"
+                                                    {{ $kleur->kleur == $kraal->kleur ? 'selected' : '' }}>
+                                                    {{ $kleur->kleur }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2 col-lg-4">
+                                        <div class="">In kleurmix
+                                        </div>
+
+                                        <div class="form-group">
+                                            @foreach ($kleurcollectie as $kleuritem)
+                                                @if ($kleuritem->kraalid == $kraal->id)
+                                                    <a class="text-decoration-none"
+                                                        href="{{ route('kleuren.show', $kleuritem->kleurid) }}">
+                                                        {{ $kleuritem->kleur }}
+                                                    </a>
+                                                @endif
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 col-lg-4">
+                                        <div class="form-group">
+                                            <div class="">In mix
+                                            </div>
+
+                                            @foreach ($mix as $kraleninmix)
+                                                @if ($kraleninmix->kraalnr == $kraal->id)
+                                                    <a class="text-decoration-none"
+                                                        href="{{ route('kralen.show', $kraleninmix->mixnr) }}">
+                                                        {{ $kraleninmix->mixnr }} {{ ' ' }}
+                                                    </a>
+                                                @endif
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 col-lg-4 mt-2">
+                                        <div class="text-center">
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-
             </form>
         @endforeach
     </div>
-    {{-- <div class="table-responsive">
-        <table class="table table-bordered data-table">
-            <tr class="table-secondary">
-                <th scope="30%">Image</th>
-                <th width="25%">@sortablelink('name', 'Naam') </th>
-                <th width="10%"> @sortablelink('nummer', 'Nummer')</th>
-                <th width="10%">zit in mix</th>
-                <th width="10%"> @sortablelink('stock', 'Voorraad')</th>
-                <th width="10%">Aantal</th>
-                <th width="10%">kies kleur</th>
-                <th width="5%">in kleur</th>
-                <th></th>
-
-            </tr>
-            @foreach ($kralen as $kraal)
-                <div>
-                    <form action="{{ route('kralen.update', $kraal->id) }}" #anchor method="POST"
-                        enctype="multipart/form-data">
-                        @method('PUT')
-                        @csrf
-                        <div style="overflow-x:auto;">
-                            <tr id='component{{ $kraal->id }}'>
-                                <td>
-                                    <div class="col-sm-1 col-md-6" style="padding-left: 0px;  padding-right: 0px;">
-                                        <a href="{{ route('kralen.show', $kraal->id) }}"><img
-                                                src="{{ url('images/' . $kraal->image) }}" loading="lazy"></a>
-
-                                    </div>
-
-                                </td>
-                                <td>
-                                    <div class="form-group">
-                                        <strong>Name:</strong>
-                                        <input type="text" name="name" class="form-control" placeholder="Name"
-                                            value="{{ $kraal->name }}" size="40">
-                                </td>
-                                <td>
-                                    <div class="form-group">
-                                        <strong>Nummer:</strong>
-                                        <input type="text" name="nummer" class="form-control" placeholder="Nummer"
-                                            value="{{ $kraal->nummer }}">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="form-group">
-                                        @foreach ($mix as $kraleninmix)
-                                            @if ($kraleninmix->kraalnr == $kraal->id)
-                                                <a href="{{ route('kralen.show', $kraleninmix->mixnr) }}">
-                                                    {{ $kraleninmix->mixnr }} {{ ',' }}
-                                                </a>
-                                            
-                                            @endif
-                                        @endforeach
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="form-group">
-                                        <strong>stock:</strong>
-                                        <input type="text" name="stock" class="form-control" placeholder="Stock"
-                                            value="{{ $kraal->stock }}">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="form-group">
-                                        <strong>aantal:</strong>
-                                        <input type="text" name="countstock" class="form-control"
-                                            placeholder="countstock" value="{{ $kraal->stock * 200 }}"readonly>
-                                    </div>
-                                </td>
-                                <td>
-                                    <select name="kleurid">
-                                        <option value="Empty"></option>
-                                        @foreach ($kleuren as $kleur)
-                                            <option value="{{ $kleur->id }}"
-                                                {{ $kleur->kleur == $kraal->kleur ? 'selected' : '' }}>
-                                                {{ $kleur->kleur }}</option>
-                                        @endforeach
-                                    </select>
-                                </td>
-
-                                <td>
-                                    <div class="form-group">
-                                        @foreach ($kleurcollectie as $kleuritem)
-                                            @if ($kleuritem->kraalid == $kraal->id)
-                                                <a href="{{ route('kleuren.show', $kleuritem->kleurid) }}">
-                                                    <p> {{ $kleuritem->kleur }}</p>
-                                                </a>
-                                            @endif
-                                        @endforeach
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="text-center">
-                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                    </div>
-                                </td>
-                            </tr>
-                        </div>
-                    </form>
-                </div>
-            @endforeach
-        </table>
-    </div> --}}
 @endsection

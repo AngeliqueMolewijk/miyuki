@@ -25,19 +25,25 @@
     {{-- <div class="container"> --}}
     <div class="card">
         <div class="row">
-            <div class="col-md-2" style="padding-left: 0px;  padding-right: 0px;">
-                <img class="card-img-top" src="{{ url('images/' . $project->image) }}">
-            </div>
-            <div class="col-md-2" style="padding-left: 0px;  padding-right: 0px;">
-                <img class="card-img-top" src="{{ url('images/' . $project->image2) }}">
+            <div class="col-lg-4">
+                <div class="row">
+                    <div class="col-lg-6" style="padding-left: 0px;  padding-right: 0px;">
+                        <img class="card-img-top" src="{{ url('images/' . $project->image) }}">
+                    </div>
+                    @if ($project->image2 != '')
+                        <div class="col-lg-6" style="padding-left: 0px;  padding-right: 0px;">
+                            <img class="card-img-top" src="{{ url('images/' . $project->image2) }}">
+                        </div>
+                    @endif
+                </div>
             </div>
             <div class="col-sm-9 col-md-8">
                 <form action="{{ route('projects.update', $project->id) }}" method="POST" enctype="multipart/form-data">
                     @method('PUT')
                     @csrf
-                    <div class="form-group">
+                    <div class="form-group ">
                         <label for="image1">Choose a photo!</label>
-                        <input type="file" class="form-control" name="image1" value="{{ $project->image }}">
+                        <input type="file" class="form-control mr-2" name="image1" value="{{ $project->image }}">
                     </div>
                     <div class="form-group">
                         <label for="image2">Choose a photo!</label>
@@ -48,40 +54,53 @@
                         <input type="text" name="name" class="form-control" value="{{ $project->naam }}"
                             placeholder="Name">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mb-2">
                         <strong>description:</strong>
                         <textarea name="description" class="form-control" value= "{{ $project->omschrijving }}" placeholder="stock">{{ $project->omschrijving }}
                         </textarea>
                     </div>
-
+                    {{-- <div class="col-sm-9 col-md-6"> --}}
+                    <div class="form-group">
+                        <strong>Kralen in project:</strong>
+                        <select class="form-control" name="kraalid">
+                            <option value="null" selected>Please select one option</option>
+                            @foreach ($kralen as $kraal)
+                                <option value="{{ $kraal->id }}">
+                                    {{ $kraal->nummer }} - {{ $kraal->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <strong>Categories:</strong>
+                        <select class="form-control" name="categorieid">
+                            <option value="null" selected>Please select one option</option>
+                            @foreach ($allcategories as $categorie)
+                                <option value="{{ $categorie->id }}">
+                                    {{ $categorie->categoriename }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
                     <div class="text-center">
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
+
                 </form>
+                {{-- <input type="hidden" name="projectid" value="{{ $project->id }}">
+                    <div class="col-xs-12 col-sm-12 col-md-12 text-center mt-2">
+                        <button type="submit" class="btn btn-primary">kralen aan project Toevoegen</button>
+                    </div>
+                    </form> --}}
             </div>
         </div>
     </div>
-    <form action="{{ url('/storekraalproject') }}" method="POST" enctype="multipart/form-data">
-        <select class="form-control" name="kraalid">
-            @csrf
-            <select class="form-control" name="kraalid">
-                <option value="null" selected>Please select one option</option>
-
-                {{-- {{ Form::open(['action' => 'KralenController@storemix']) }} --}}
-                @foreach ($kralen as $kraal)
-                    <option value="{{ $kraal->id }}">
-                        {{ $kraal->nummer }} - {{ $kraal->name }}
-                    </option>
+    <div class="card">
+        <strong> in de volgende categorien <strong><br>
+                @foreach ($categoriesproject as $projectcat)
+                    {{ $projectcat->categoriename }}
                 @endforeach
-                {{-- {{ Form::close() }} --}}
-
-            </select>
-
-            <input type="hidden" name="projectid" value="{{ $project->id }}">
-            <div class="col-xs-12 col-sm-12 col-md-12 text-center mt-2">
-                <button type="submit" class="btn btn-primary">kralen aan project Toevoegen</button>
-            </div>
-    </form>
+    </div>
     <div class="col-md-12">
         <div class="row mt-2">
             <div class="cardsgrid">

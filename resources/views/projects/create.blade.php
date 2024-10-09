@@ -48,23 +48,36 @@
                     <strong>Kraalid:</strong>
                     <input type="text" name="Kraalid" class="form-control" placeholder="Kraalid">
                 </div> --}}
-            </div>
 
 
-            <select class="form-control" name="kraalid">
-                <option value="null" selected>Please select one option</option>
+                <strong>Kralen:</strong>
 
-                {{-- {{ Form::open(['action' => 'KralenController@storemix']) }} --}}
-                @foreach ($kralen as $kraal)
-                    <option value="{{ $kraal->id }}">
-                        {{ $kraal->nummer }} - {{ $kraal->name }}
-                    </option>
-                @endforeach
-                {{-- {{ Form::close() }} --}}
+                <select class="form-control mt-2" name="kraalid">
+                    <option value="null" selected>Please select one option</option>
 
-            </select>
-            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                    {{-- {{ Form::open(['action' => 'KralenController@storemix']) }} --}}
+                    @foreach ($kralen as $kraal)
+                        <option value="{{ $kraal->id }}">
+                            {{ $kraal->nummer }} - {{ $kraal->name }}
+                        </option>
+                    @endforeach
+                    {{-- {{ Form::close() }} --}}
+
+                </select>
+                <div class="form-group">
+                    <strong>Categories:</strong>
+                    <select class="form-control" name="categorieid">
+                        <option value="null" selected>Please select one option</option>
+                        @foreach ($allcategories as $categorie)
+                            <option value="{{ $categorie->id }}">
+                                {{ $categorie->categoriename }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 text-center mt-2">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
             </div>
         </div>
         {{-- <input type="hidden" name="projectid" value="{{ $project->id }}"> --}}

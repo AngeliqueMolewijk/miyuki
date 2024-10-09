@@ -30,6 +30,12 @@ Route::get('/searchmix', [KralenController::class, 'searchmix']);
 Route::get('/list', [KralenController::class, 'list']);
 Route::get('/opvoorraad', [KralenController::class, 'opvoorraad']);
 Route::get('clickgrid', [ProjectController::class, 'clickgrid']);
+Route::get('/createCategorie', [ProjectController::class, 'createCategorie'])
+    ->name('createCategorie');
+Route::get('/categories', [ProjectController::class, 'Categories'])->name('categories');
+Route::post('/storecategorie', [ProjectController::class, 'storecategorie'])->name('storecategorie');
+Route::get('/filter/{name}', [ProjectController::class, 'filter'])->name('filter');
+
 Route::post('storekraalproject', [ProjectController::class, 'storekraalproject']);
 // Route::get('destroyuitproject/{kraalid}/{projectid}', 'ProjectController@destroyuitproject');
 Route::GET('/destroyuitproject/{projectid}/{kraalid})', [ProjectController::class, 'destroyuitproject'])->name('delete-from-project');

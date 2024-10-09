@@ -24,15 +24,24 @@
 </head>
 
 <body>
-    @include('kralen.navbar')
+    <div class="container">
+        <div class="row">
+            @include('kralen.navbar')
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                @include('kralen.sidebar')
+            </div>
+            <div class="col-md-10">
+                @yield('content')
+            </div>
+        </div>
+        {{-- <div class="row">
 
-    <div class="row">
-
+    </div> --}}
+        {{-- <div class="container"> --}}
+        {{-- </div> --}}
     </div>
-    {{-- <div class="container"> --}}
-    @yield('content')
-    {{-- </div> --}}
-
 </body>
 
 </html>
