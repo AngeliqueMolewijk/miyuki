@@ -8,7 +8,10 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('kralen.index') }}">Kralen</a>
+                    <a class="nav-link" href="{{ url('/allekralen') }}">Alle Kralen</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('kralen.index') }}">Mijn Kralen</a>
                 </li>
                 {{-- <li class="nav-item">
                     <a class="nav-link" href="{{ url('/searchmix') }}">Mix</a>
@@ -25,6 +28,38 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('/projects') }}">Projecten</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('/readpatternphp') }}">Build Pattern</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://beadographer.com/profile/" target="_blank">Beadographer</a>
+                </li>
+                @guest
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->is('login') ? 'active' : '' }}"
+                            href="{{ route('login') }}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->is('register') ? 'active' : '' }}"
+                            href="{{ route('register') }}">Register</a>
+                    </li>
+                @else
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            {{ Auth::user()->name }}
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();">Logout</a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                                    @csrf
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
+                @endguest
                 {{-- <li class="nav-item">
                     <a class="nav-link" href="{{ route('kralen.create') }}">Nieuwe kralen</a>
                 </li>
@@ -38,5 +73,5 @@
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
         </div>
-    </div>  
+    </div>
 </nav>

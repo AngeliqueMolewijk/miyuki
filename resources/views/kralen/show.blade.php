@@ -119,7 +119,46 @@
                 </div>
             </div>
         @endif
-
+        @php
+            $mixes = strpos($kraal->name, 'mix');
+        @endphp
+        {{-- @if ($mixes) --}}
+        <div class="row">
+            <h3>
+                <div class="mt-2"id="kleureninmixlink">
+                    Kralen die in deze mix voorkomen
+            </h3>
+            <div class="row mt-2">
+                <div class="cardsgrid">
+                    @foreach ($mixvankraal as $kraalchunck)
+                        <div class="card mr-2" style="">
+                            <a href="{{ route('kralen.show', $kraalchunck->mixnr) }}"><img class="card-img-top1"
+                                    src="{{ url('images/' . $kraalchunck->image) }}"></a>
+                            <div class="card-body">
+                                <h5 class="card-title"> {{ $kraalchunck->name }}</h5>
+                                <h5 class="card-title"> Nummer: {{ $kraalchunck->nummer }}</h5>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-muted">Voorraad: {{ $kraalchunck->stock }} gram</small>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-muted">Aantal: {{ $kraalchunck->stock * 200 }} stuks</small>
+                            </div>
+                            <form
+                                action="{{ route('delete-from-mix', ['mixid' => $kraalchunck->mixnr, 'kraalid' => $kraalchunck->id]) }}"
+                                method="get">
+                                <a class="btn btn-info" href="{{ route('kralen.show', $kraalchunck->id) }}">Show</a>
+                                <a class="btn btn-primary" href="{{ route('kralen.edit', $kraalchunck->id) }}">Edit</a>
+                                <button type="submit" class="btn btn-danger"
+                                    onclick="return confirm('Do you want to delete this product?');">Delete from
+                                    mix</button>
+                            </form>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+        {{-- @endif --}}
         <div class="row mt-2" id="linktoprojecten">
             <h3> projecten </h3>
             <div class="cardsgrid">
@@ -129,7 +168,7 @@
                         <a href="{{ route('projects.show', $project->projectid) }}"><img class="card-img-top1"
                                 src="{{ url('images/' . $project->image) }}"></a>
                         <div class="card-footer">
-                            <small class="text-muted">Kleur: {{ $project->name }}</small>
+                            <small class="text-muted">{{ $project->naam }}</small>
                         </div>
                     </div>
                 @endforeach

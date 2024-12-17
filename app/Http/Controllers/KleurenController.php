@@ -58,7 +58,7 @@ class KleurenController extends Controller
             $kleur->save();
 
             return redirect()->route('kleuren.index')
-            ->with('success', 'Product created successfully.');
+                ->with('success', 'Product created successfully.');
         }
     }
 
@@ -72,6 +72,7 @@ class KleurenController extends Controller
 
         $kleurcollectie = kleurtype::Join('kleurs', 'kleurtypes.kleurid', '=', 'kleurs.id')
             ->join('kraals', 'kraals.id', '=', 'kleurtypes.kraalid')
+            ->orderBy('kraals.stock', 'DESC')
             ->where('kleurs.id', '=', $id)
             ->get();
         $currentkleur = Kleur::findOrFail($id);

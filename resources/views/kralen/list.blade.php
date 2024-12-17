@@ -2,11 +2,8 @@
 
 @section('content')
     <div class="row">
-        <div class="col margin-tb">
-            <div class="">
-                <h2>Lijst met alle kralen</h2>
-            </div>
-        </div>
+        <h1>Lijst met kralen</h1>
+
     </div>
     <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
     @if ($errors->any())
@@ -67,25 +64,6 @@
                                                 value="{{ $kraal->nummer }}">
                                         </div>
                                     </div>
-
-                                    <div class="col-md-2 col-lg-4">
-                                        <div class="form-group">
-                                            <div class="">Voorraad
-                                                gram
-                                            </div>
-                                            <input type="text" name="stock" class="form-control" placeholder="Stock"
-                                                value="{{ $kraal->stock }}">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2 col-lg-4">
-                                        <div class="form-group">
-                                            <div class="">Voorraad
-                                                aantal
-                                            </div>
-                                            <input type="text" name="countstock" class="form-control"
-                                                placeholder="countstock" value="{{ $kraal->stock * 200 }}"readonly>
-                                        </div>
-                                    </div>
                                     <div class="col-md-2 col-lg-4">
                                         <div class="">Aan kleurmix
                                         </div>
@@ -99,6 +77,8 @@
                                             @endforeach
                                         </select>
                                     </div>
+
+
                                     <div class="col-md-2 col-lg-4">
                                         <div class="">In kleurmix
                                         </div>
@@ -123,13 +103,32 @@
                                                 @if ($kraleninmix->kraalnr == $kraal->id)
                                                     <a class="text-decoration-none"
                                                         href="{{ route('kralen.show', $kraleninmix->mixnr) }}">
-                                                        {{ $kraleninmix->mixnr }} {{ ' ' }}
+                                                        {{-- {{ $separator = $kraleninmix != end($mix) ? ',<br>' : '' }} --}}
+                                                        {{ $kraleninmix->name }} <br>
                                                     </a>
                                                 @endif
                                             @endforeach
                                         </div>
                                     </div>
-                                    <div class="col-md-2 col-lg-4 mt-2">
+                                    <div class="col-md-2 col-lg-4">
+                                        <div class="form-group">
+                                            <div class="">Voorraad
+                                                gram
+                                            </div>
+                                            <input type="text" name="stock" class="form-control" placeholder="Stock"
+                                                value="{{ $kraal->stock }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 col-lg-4">
+                                        <div class="form-group">
+                                            <div class="">Voorraad
+                                                aantal
+                                            </div>
+                                            <input type="text" name="countstock" class="form-control"
+                                                placeholder="countstock" value="{{ $kraal->stock * 200 }}"readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 col-lg-4 mx-md-n10">
                                         <div class="text-center">
                                             <button type="submit" class="btn btn-primary">Submit</button>
                                         </div>

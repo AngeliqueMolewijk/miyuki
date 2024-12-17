@@ -8,6 +8,9 @@ use App\Models\Kraal;
 use App\Models\Mix;
 use App\Models\Kleurtype;
 use App\Models\Project;
+use App\Models\Allekralen;
+use App\Models\KleurNumber;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 use Redirect;
@@ -110,12 +113,19 @@ class KralenController extends Controller
         $mixkiezen = Kraal::where('nummer', 'not like', '%mix%')->orderBy('nummer', 'ASC')->get();
 
         $kraleninmix = Mix::Join('kraals', 'kraals.id', '=', 'mixes.kraalnr')
+            ->orderBy('kraals.stock', 'DESC')
             ->where('mixes.mixnr', '=', $id)
             ->get();
+
+        $mixvankraal = Mix::Join('kraals', 'kraals.id', '=', 'mixes.mixnr')
+        ->where('mixes.kraalnr', '=', $id)
+            ->get();
+        // return response()->json($mixvankraal);
+
         $inkleurtypes = kleurtype::Join('kleurs', 'kleurs.id', '=', 'kleurtypes.kleurid')
             ->where('kleurtypes.kraalid', '=', $id)
             ->get();
-        return view('kralen.show', compact('kraal', 'mixkiezen', 'kraleninmix', 'inkleurtypes', 'projecten'));
+        return view('kralen.show', compact('kraal', 'mixkiezen', 'kraleninmix', 'inkleurtypes', 'projecten', 'mixvankraal'));
     }
 
     /**
@@ -210,11 +220,13 @@ class KralenController extends Controller
     {
         $kralen = Kraal::sortable(['stock' => 'desc'])->orderBy('nummer', 'ASC')->get();
         $kleuren = Kleur::orderBy('kleur', 'ASC')->get();
-        $mix = Mix::all();
+        $mix = Mix::join('kraals', 'kraals.id', '=',  'mixes.mixnr')->get();
 
         $kleurcollectie = Kraal::join('kleurtypes', 'kraals.id', '=', 'kleurtypes.kraalid')
             ->Join('kleurs', 'kleurtypes.kleurid', '=', 'kleurs.id')
             ->get();
+
+        // return response()->json($mix);
 
         return view('kralen.list', compact('kralen', 'mix', 'kleurcollectie', 'kleuren'));
     }
@@ -223,5 +235,17 @@ class KralenController extends Controller
     {
         $kralen = Kraal::orderBy('nummer', 'ASC')->get();
         return view('kralen.test', compact('kralen'));
+    }
+    public function allekralen()
+    {
+        $kralen = KleurNumber::join('allekralen', 'allekralen.code', '=', 'kleurnumber.number')
+        ->select('kleurnumber.*', 'allekralen.name as allekralename', 'allekralen.image')
+        ->get();
+
+        // return response()->json($kralen);
+        // $kralen = Allekralen::all();
+        // dd($kralen);
+        $aantalmix = Mix::all();
+        return view('kralen.allekralen', compact('kralen', 'aantalmix'));
     }
 }

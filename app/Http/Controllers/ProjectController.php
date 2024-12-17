@@ -7,10 +7,17 @@ use App\Models\Kraal;
 use App\Models\Project;
 use App\Models\ProjectCategorie;
 use App\Models\projectkraal;
+use App\Models\pattern;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+
+use App\Models\Auth\LoginRegisterController;
+use Doctrine\Inflector\Rules\Pattern as RulesPattern;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Laravel\Prompts\Prompt;
+use Mockery\Matcher\Pattern as MatcherPattern;
 use PhpParser\Node\Expr\New_;
 use SebastianBergmann\Type\NullType;
 
@@ -27,7 +34,9 @@ class ProjectController extends Controller
         // ->get();
 
         // dd($projecten);
-        $projecten = Project::all();
+        $userid = Auth::id();
+
+        $projecten = Project::where('user', $userid)->get();
 
         $cattoproject = ProjectCategorie::leftJoin('categories', 'categories.id', '=', 'project_categories.categorieid')
             // ->leftjoin('categories', 'categories.id', '=', 'project_categories.categorieid')
@@ -76,6 +85,8 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
+        $userid = Auth::id();
+
         $validator = Validator::make($request->all(), [
             'nummer' => 'unique:kraals,nummer|string|max:255',
 
@@ -103,6 +114,7 @@ class ProjectController extends Controller
         $project->naam = $request->title;
         $project->omschrijving = $request->description;
         $project->kraalid = $request->Kraalid;
+        $project->user = $userid;
 
         // $puzzel->own = $request->eigen;
         // $puzzel->gelegd = $request->gelegd;
@@ -232,7 +244,7 @@ class ProjectController extends Controller
             $categorieid->save();
         }
         // dd($request->kleurid);
-        return redirect()->route('projects.show',  ['project' => $project->id])->with('message', 'State saved correctly!!!');
+        return redirect()->route('projects.edit',  ['project' => $project->id])->with('message', 'State saved correctly!!!');
 
         // return redirect()->route('projects.show', compact($project->id));
         // return back()
@@ -277,13 +289,101 @@ class ProjectController extends Controller
         $categorie = new Categorie();
         $categorie->categoriename = $request->categorieName;
         $categorie->save();
+        if ($request->projectid != 'null') {
+            $insertedId = $categorie->id;
+            $project = new ProjectCategorie();
+            $project->projectid = $request->projectid;
+            $project->categorieid = $insertedId;
+            $project->save();
+            return redirect()->route('projects.show', $request->projectid);
+        }
+        return redirect()->route('projects.index');
+    }
+    public function buildpattern(Request $request)
+    {
 
-        $insertedId = $categorie->id;
-        $project = new ProjectCategorie();
-        $project->projectid = $request->projectid;
-        $project->categorieid = $insertedId;
-        $project->save();
+        $test = response()->json($request->input("data"));
+        $newObject = json_decode($request, true);
 
-        return redirect()->route('projects.show', $request->projectid);
+        foreach ($request->input("data") as $data) {
+            $patterndata = pattern::where('name', $data['name'])
+            ->where('number', $data['number'])
+            ->where('user', $data['user'])
+            ->first();
+
+            if ($patterndata != '') {
+                $patternUpdate = pattern::find($patterndata['id']);
+                // $patternUpdate = pattern::where('id', $patterndata['id']);
+                $patternUpdate->color = $data['color'];
+                $patternUpdate->save();
+            } else {
+                $pattern = new pattern();
+                $pattern->number = $data['number'];
+                $pattern->color = $data['color'];
+                $pattern->name = $data['name'];
+                $pattern->size = $data['size'];
+                $pattern->user = $data['user'];
+                $pattern->kind = $data['kind'];
+                $pattern->save();
+            }
+        }
+        // Sending json response to client
+        // return redirect('/readbuildpattern');
+        // return readbuildpattern();
+        return response()->json([
+            // "status" => true,
+            "data" => $request->data
+        ]);
+        // return response()->json($request->data);
+
+        // return response()->json($request->input("regionName"));
+    }
+    // }
+    public function buildpatternget()
+    {
+        return view('projects.buildproject');
+    }
+    public function readbuildpattern()
+    {
+        // $Pattern = pattern::all();
+        $id = Auth::id();
+        // dd($id);
+        $Pattern = pattern::where('user', $id)->get();
+        $patternNames = pattern::where('user', $id)->select('name')
+        ->orderBy('name')
+        ->groupBy('name')
+        ->get();
+        // dd($Pattern);
+        // dd(response()->json($Pattern));
+        // $Pattern = $Pattern->toArray();
+        $x = 10;
+        // $userInfo = User::find(Auth::id())->with('personalInfo')->first();
+
+        return view('projects.readbuildproject', compact('Pattern', 'patternNames'));
+        // return view('projects.readbuildproject', ['data' => $Pattern]);
+
+    }
+    public function readbuildpatternew($pattern)
+    {
+        $id = Auth::id();
+        // dd($id);
+        $Pattern = pattern::findOrFail($pattern);
+        $patternNames = pattern::where('user', $id)->select('name')
+        ->orderBy('name')
+        ->groupBy('name')
+        ->get();
+        return view('projects.readbuildprojectnew', compact('Pattern', 'patternNames'));
+    }
+    public function deleteproject(Request $request)
+    {
+        $pattern = pattern::where('name', $request->data[0])->where('user', $request->data[1])->get();
+        foreach ($pattern as $pat) {
+            $pat =  pattern::findOrFail($pat->id);
+            $pat->delete();
+        }
+        return response()->json([
+            // "status" => true,
+            "data" => $request->data
+        ]);
     }
 }

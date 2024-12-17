@@ -13,19 +13,22 @@
         {{-- </div> --}}
         <div class="card">
             <div class="row">
-                <div class="col-lg-4">
-                    <div class="row">
-                        <div class="col-sm-2 col-lg-6">
-                            <img class="card-img-top" src="{{ url('images/' . $project->image) }}">
+                <div class="col-lg-12">
+                    <div class="row mb-2">
+                        <div class="col-sm-4 col-lg-4">
+                            {{-- <button class="open-button" onclick="openForm()">Open Form</button> --}}
+
+                            <img class="card-img-top open-button" src="{{ url('images/' . $project->image) }}"
+                                onclick="openForm()">
                         </div>
                         @if ($project->image2 != '')
-                            <div class="col-sm-2 col-lg-6">
-                                <img class="card-img-top1" src="{{ url('images/' . $project->image2) }}">
+                            <div class="col-sm-4 col-lg-4">
+                                <img class="card-img-top1 popup_image" src="{{ url('images/' . $project->image2) }}">
                             </div>
                         @endif
                     </div>
                 </div>
-                <div class = "col-lg-8">
+                <div class = "col-lg-12">
                     {{-- </div> --}}
                     {{-- <div class="col-lg-8"> --}}
                     <div class="row">
@@ -125,5 +128,24 @@
         </div>
 
     </div>
+    <button class="open-button" onclick="openForm()">Open Form</button>
+    <div class="popup-container">
+        <div class="img-popup popup-container" id="myForm">
+            <div class="col-sm-6 col-lg-6">
+                <img class="card-img-top1" src="{{ url('images/' . $project->image) }}">
+            </div>
+            <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+            {{-- </form> --}}
+        </div>
     </div>
+    {{-- </div> --}}
 @endsection
+<script>
+    function openForm() {
+        document.getElementById("myForm").style.display = "block";
+    }
+
+    function closeForm() {
+        document.getElementById("myForm").style.display = "none";
+    }
+</script>

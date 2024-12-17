@@ -6,11 +6,15 @@
         "build": "vite build"
     },
     "devDependencies": {
-        "axios": "^1.6.4",
+        "axios": "^1.7.7",
         "bootstrap": "^5.3.3",
         "laravel-vite-plugin": "^1.0",
         "sass": "^1.77.6",
         "vite": "^5.0",
         "webpack-livereload-plugin": "^1.2.0"
+    },
+    "dependencies": {
+        "html2canvas": "^1.4.1",
+        "jquery-colorbox": "^1.6.4"
     }
 }

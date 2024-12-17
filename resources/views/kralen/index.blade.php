@@ -6,7 +6,7 @@
         </div>
     @endif
 
-    <div class="main">
+    <div class="row">
         <h1>Miyuki kralen</h1>
         {{-- <a href="{{ route('kralen.create') }}" class="btn btn-info" role="button">Nieuw Kraal</a>
         @sortablelink('stock', 'Stock')
@@ -64,4 +64,5 @@
 
             {{-- </ul> --}}
         </div>
-    @endsection
+    </div>
+@endsection
