@@ -41,10 +41,13 @@
                                     {{ $kraal->stock * 200 }} stuks</h4>
                             </div>
                         </div>
-                        <div class="col-md-12">
-                            <a href="{{ route('kralen.edit', $kraal->id) }}" class="btn btn-primary" role="button"
-                                aria-pressed="true">Edit</a>
-                        </div>
+                        <form action="{{ route('kralen.destroy', $kraal->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <a class="btn btn-primary" href="{{ route('kralen.edit', $kraal->id) }}">Edit</a>
+                            <button type="submit" class="btn btn-danger"
+                                onclick="return confirm('Do you want to delete this product?');">Delete</button>
+                        </form>
                     </div>
                 </div>
                 <div class="col-sm-2 ">
@@ -123,7 +126,7 @@
             $mixes = strpos($kraal->name, 'mix');
         @endphp
         {{-- @if ($mixes) --}}
-        <div class="row">
+        {{-- <div class="row">
             <h3>
                 <div class="mt-2"id="kleureninmixlink">
                     Kralen die in deze mix voorkomen
@@ -157,7 +160,7 @@
                     @endforeach
                 </div>
             </div>
-        </div>
+        </div> --}}
         {{-- @endif --}}
         <div class="row mt-2" id="linktoprojecten">
             <h3> projecten </h3>

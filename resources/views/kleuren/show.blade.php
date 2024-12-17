@@ -19,12 +19,12 @@
                             <div class="col">
                                 <div class="kleurenkaart">
                                     @if ($kleur->hexa != '#0')
-                                        <a href="{{ route('kleuren.show', $kleur->id) }}#anchor-kleuren">
+                                        <a href="{{ route('kleuren.show', $kleur->id) }}">
                                             <div class="card_title h-50" style="background-color:{{ $kleur->hexa }}">
                                             </div>
                                         </a>
                                     @else
-                                        <a href="{{ route('kleuren.show', $kleur->id) }}#anchor-kleuren">
+                                        <a href="{{ route('kleuren.show', $kleur->id) }}">
                                             <div><img src="{{ url('images/rainbow3.jpg') }}"></img>
                                             </div>
                                         </a>

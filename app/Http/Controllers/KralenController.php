@@ -8,12 +8,9 @@ use App\Models\Kraal;
 use App\Models\Mix;
 use App\Models\Kleurtype;
 use App\Models\Project;
-use App\Models\Allekralen;
 use App\Models\KleurNumber;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
-use Redirect;
 
 class KralenController extends Controller
 {
@@ -25,6 +22,8 @@ class KralenController extends Controller
     }
     public function opvoorraad()
     {
+        // show all beads that are on stock
+
         $kralen = Kraal::sortable(['stock' => 'desc'])->where('stock', '>', 0)->get();
         $aantalmix = Mix::all();
         return view('kralen.index', compact('kralen', 'aantalmix'));
@@ -37,15 +36,10 @@ class KralenController extends Controller
     {
         return view('kralen.createkleuren');
     }
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
-
+        //to store new beads    
         $validator = Validator::make($request->all(), [
             'nummer' => 'unique:kraals,nummer|string|max:255',
 
@@ -57,7 +51,6 @@ class KralenController extends Controller
         }
 
         $kraal = new Kraal;
-        // dd($request->file('image'));
         if ($request->file('image')) {
             $file = $request->file('image');
             $filename = date('YmdHi') . $file->getClientOriginalName();
@@ -96,12 +89,7 @@ class KralenController extends Controller
         $mixkraal->delete();
         return back();
     }
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function show($id)
     {
         $kraal = Kraal::findOrFail($id);
@@ -118,9 +106,9 @@ class KralenController extends Controller
             ->get();
 
         $mixvankraal = Mix::Join('kraals', 'kraals.id', '=', 'mixes.mixnr')
-        ->where('mixes.kraalnr', '=', $id)
+            ->where('mixes.kraalnr', '=', $id)
             ->get();
-        // return response()->json($mixvankraal);
+
 
         $inkleurtypes = kleurtype::Join('kleurs', 'kleurs.id', '=', 'kleurtypes.kleurid')
             ->where('kleurtypes.kraalid', '=', $id)
@@ -128,12 +116,7 @@ class KralenController extends Controller
         return view('kralen.show', compact('kraal', 'mixkiezen', 'kraleninmix', 'inkleurtypes', 'projecten', 'mixvankraal'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit(string $id)
     {
         $kleuren = Kleur::orderBy('kleur', 'ASC')->get();
@@ -151,13 +134,6 @@ class KralenController extends Controller
         return view('kralen.edit', compact('kraal', 'kleuren', 'kleurcollectie', 'mixkiezen', 'kraleninmix'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
 
@@ -183,18 +159,13 @@ class KralenController extends Controller
         return redirect(url()->previous() . '#component' . $kraal->id);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $kraal = Kraal::find($id);
         $kraal->delete();
 
-
+        $inkleurtypes = Kleurtype::where('kleurtypes.kraalid', $id);
+        $inkleurtypes->delete();
         return redirect()->route('kralen.index')
             ->with('success', 'Kraal deleted successfully');
     }
