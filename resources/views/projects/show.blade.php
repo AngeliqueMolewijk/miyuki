@@ -140,6 +140,8 @@
     </div>
     {{-- </div> --}}
 @endsection
+
+{{-- test for opening image in a bigger screen --}}
 <script>
     function openForm() {
         document.getElementById("myForm").style.display = "block";

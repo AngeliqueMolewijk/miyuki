@@ -13,8 +13,8 @@
         @foreach ($kralen as $kraal)
             <div class="cards_item text-center">
                 <div class="card h-100">
-                    <div class="card-img-top"><a href="{{ route('kralen.show', $kraal->id) }}"><img
-                                src="{{ url($kraal->image) }}"></a>
+                    <div class="card-img-top">
+                        <img src="{{ url($kraal->image) }}">
                     </div>
                     <div class="card-body">
                         <div class="card_content">
@@ -29,7 +29,7 @@
                     </div>
                     <div class="card-footer">
 
-                        <form action="{{ route('kralen.destroy', $kraal->id) }}" method="POST">
+                        {{-- <form action="{{ route('kralen.destroy', $kraal->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
 
@@ -39,7 +39,7 @@
 
                             <button type="submit" class="btn btn-danger"
                                 onclick="return confirm('Do you want to delete this product?');">Delete</button>
-                        </form>
+                        </form> --}}
                     </div>
 
                 </div>
