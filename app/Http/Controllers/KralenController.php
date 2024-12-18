@@ -187,7 +187,6 @@ class KralenController extends Controller
         // show all beads that are mixes
         $kralen = Kraal::sortable(['name' => 'desc'])->where('name', 'like', "%mix%")->get();
 
-
         $aantalmix = Mix::all();
 
         return view('kralen.index', compact('kralen', 'aantalmix'));

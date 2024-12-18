@@ -38,7 +38,7 @@
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <input type="submit" class="col-md-3 offset-md-5 btn btn-primary" value="Login">
+                            <input type="submit" class="btn btn-primary" value="Login">
                         </div>
 
                     </form>

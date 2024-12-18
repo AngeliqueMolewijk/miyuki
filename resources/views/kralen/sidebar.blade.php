@@ -3,7 +3,6 @@
         <svg class="bi pe-none me-2" width="30" height="24">
             <use xlink:href="#bootstrap" />
         </svg>
-        <span class="fs-5 fw-semibold">Categories</span>
     </a>
     <ul class="list-unstyled ps-0">
         <li class="mb-1">
@@ -25,7 +24,7 @@
                 </ul>
             </div>
         </li>
-        @if (request()->is('kralen*') or request()->is('searchmix*') or request()->is('list*') or request()->is('opvoorraad*'))
+        @if (request()->is('kralen') or request()->is('searchmix*') or request()->is('list*') or request()->is('opvoorraad*'))
             <li class="mb-1">
                 <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
                     data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="true">
@@ -70,7 +69,7 @@
                 </div>
             </li>
         @endif
-        @if (request()->is('kralen*') or request()->is('searchmix*') or request()->is('list*') or request()->is('opvoorraad*'))
+        @if (request()->is('kralen') or request()->is('searchmix*') or request()->is('list*') or request()->is('opvoorraad*'))
             <li class="border-top my-3"></li>
             <li class="mb-1">
                 <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
