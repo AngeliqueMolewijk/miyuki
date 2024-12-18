@@ -8,16 +8,8 @@
 
     <div class="row">
         <h1>Miyuki kralen</h1>
-        {{-- <a href="{{ route('kralen.create') }}" class="btn btn-info" role="button">Nieuw Kraal</a>
-        @sortablelink('stock', 'Stock')
-        @sortablelink('name', 'Naam')
-        @sortablelink('nummer', 'Nummer') --}}
         <div class="cardsgrid">
-            {{-- <ul class="cards"> --}}
             @foreach ($kralen as $kraal)
-                {{-- @foreach ($chunk as $kraal) --}}
-
-
                 <div class="cards_item text-center">
                     <div class="card h-100">
                         <div class="card-img-top"><a href="{{ route('kralen.show', $kraal->id) }}"><img
@@ -32,12 +24,10 @@
                             <p class="card_text">Voorraad:
                                 {{ $kraal->stock }} gram</p>
                         </div>
-                        {{-- @foreach ($aantalmix as $mix) --}}
                         @if ($aantalmix->where('mixnr', $kraal->id)->count() > 0)
                             <p>Aantal kleuren:
                                 {{ $aantalmix->where('mixnr', $kraal->id)->count() }}
-                                {{-- @endforeach --}}</p>
-                        @else
+                            @else
                             <div>
                                 <p>Geen Mix</p>
                             </div>
@@ -61,8 +51,6 @@
                     </div>
                 </div>
             @endforeach
-
-            {{-- </ul> --}}
         </div>
     </div>
 @endsection

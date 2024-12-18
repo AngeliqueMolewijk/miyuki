@@ -28,9 +28,6 @@
         integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-    {{-- <script type="text/javascript" src="{{ asset('js/clickgrid.js') }}"></script> --}}
-
-    {{-- <link rel="stylesheet" href="{{ asset('css/cards.css') }}"> --}}
 </head>
 
 <body>
@@ -46,16 +43,9 @@
                 @yield('content')
             </div>
         </div>
-        {{-- <div class="row">
-
-    </div> --}}
-        {{-- <div class="container"> --}}
-        {{-- </div> --}}
     </div>
 
 </body>
 
 </html>
-{{-- <script type="text/javascript" src="{{ asset('js/clickgrid.js') }}"></script> --}}
 <script type="text/javascript" src="{{ asset('js/buttontotop.js') }}"></script>
-{{-- <script type="text/javascript" src="{{ asset('js/buildpattern.js') }}"></script> --}}

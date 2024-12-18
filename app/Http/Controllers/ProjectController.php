@@ -11,40 +11,22 @@ use App\Models\pattern;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
-use App\Models\Auth\LoginRegisterController;
-use Doctrine\Inflector\Rules\Pattern as RulesPattern;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\DB;
-use Laravel\Prompts\Prompt;
-use Mockery\Matcher\Pattern as MatcherPattern;
-use PhpParser\Node\Expr\New_;
-use SebastianBergmann\Type\NullType;
 
 class ProjectController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
-        //
-        // $projecten = Project::leftJoin('project_categories', 'projects.id', '=', 'project_categories.projectid')
-        // ->leftjoin('categories', 'categories.id', '=', 'project_categories.categorieid')
-        // ->get();
 
-        // dd($projecten);
         $userid = Auth::id();
 
         $projecten = Project::where('user', $userid)->get();
-
         $cattoproject = ProjectCategorie::leftJoin('categories', 'categories.id', '=', 'project_categories.categorieid')
-            // ->leftjoin('categories', 'categories.id', '=', 'project_categories.categorieid')
             ->get();
 
         $categories = Categorie::all();
-        // return response()->json($cattoproject);
-
         $allcategories = Categorie::all();
 
         // dd($cattoproject);
@@ -58,20 +40,14 @@ class ProjectController extends Controller
             ->where('categories.categoriename', 'like', '%' . $name . '%')
             ->get();
         $cattoproject = ProjectCategorie::leftJoin('categories', 'categories.id', '=', 'project_categories.categorieid')
-            // ->leftjoin('categories', 'categories.id', '=', 'project_categories.categorieid')
             ->get();
         $categories = Categorie::all();
         $allcategories = Categorie::all();
 
         // dd($categories);
-        // $projecten = Project::join('project_categories', 'project_categories.categorieid', '=', $categories->id);
-
-        // dd($categories);
         return view('projects.index', compact('projecten', 'categories', 'cattoproject', 'allcategories'));
     }
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
         $kralen = Kraal::all();
@@ -80,9 +56,6 @@ class ProjectController extends Controller
         return view('projects.create', compact('kralen', 'allcategories'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $userid = Auth::id();
@@ -116,9 +89,6 @@ class ProjectController extends Controller
         $project->kraalid = $request->Kraalid;
         $project->user = $userid;
 
-        // $puzzel->own = $request->eigen;
-        // $puzzel->gelegd = $request->gelegd;
-        // $puzzel->image = $imageName;
         $project->save();
 
         $insertedId = $project->id;
@@ -136,13 +106,8 @@ class ProjectController extends Controller
             $projectcat->save();
         }
         return $this->show($insertedId);
-        // return redirect()->route('projects.show', compact($project->id))
-        //     ->with('success', 'Product created successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         $project = Project::findOrFail($id);
@@ -162,9 +127,6 @@ class ProjectController extends Controller
         return view('projects.show', compact('project', 'kraleninproject', 'kralen', 'categories', 'allcategories'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         $project = Project::findOrFail($id);
@@ -177,9 +139,7 @@ class ProjectController extends Controller
             ->get();
         // dd($categoriesproject);
         $kralen = Kraal::orderBy('nummer', 'ASC')->get();
-        // $categories = Categorie::all();
         $allcategories = Categorie::all();
-        // return response()->json($project);
         return view('projects.edit', compact('project', 'projectkraal', 'kraleninproject', 'kralen', 'categoriesproject', 'allcategories'));
     }
     public function storekraalproject(Request $request)
@@ -199,17 +159,12 @@ class ProjectController extends Controller
 
         return redirect()->route('projects.show', $projectid);
     }
-    /**
-     * Update the specified resource in storage.
-     */
+
     public function update(Request $request, string $id)
     {
         // dd($request);
-        // dd($request);
         $project = Project::find($id);
-        // dd($kraal);
         // dd($request->image);
-        // dd($request->hasFile('image'));
         if ($request->hasFile('image1')) {
             $file = $request->file('image1');
             $filename = date('YmdHi') . $file->getClientOriginalName();
@@ -226,8 +181,7 @@ class ProjectController extends Controller
         $project->omschrijving = $request->description;
         $project->kraalid = $request->kraalid;
         // dd($request->stock);
-        // $puzzel->own = $request->eigen;
-        // $puzzel->gelegd = $request->gelegd;
+
         $project->save();
 
         $insertedId = $project->id;
@@ -245,15 +199,8 @@ class ProjectController extends Controller
         }
         // dd($request->kleurid);
         return redirect()->route('projects.edit',  ['project' => $project->id])->with('message', 'State saved correctly!!!');
-
-        // return redirect()->route('projects.show', compact($project->id));
-        // return back()
-        //     ->with('success', 'Project updated successfully');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         // dd($id);
@@ -302,18 +249,17 @@ class ProjectController extends Controller
     public function buildpattern(Request $request)
     {
 
-        $test = response()->json($request->input("data"));
-        $newObject = json_decode($request, true);
+        // $test = response()->json($request->input("data"));
+        // $newObject = json_decode($request, true);
 
         foreach ($request->input("data") as $data) {
             $patterndata = pattern::where('name', $data['name'])
-            ->where('number', $data['number'])
-            ->where('user', $data['user'])
-            ->first();
+                ->where('number', $data['number'])
+                ->where('user', $data['user'])
+                ->first();
 
             if ($patterndata != '') {
                 $patternUpdate = pattern::find($patterndata['id']);
-                // $patternUpdate = pattern::where('id', $patterndata['id']);
                 $patternUpdate->color = $data['color'];
                 $patternUpdate->save();
             } else {
@@ -327,41 +273,29 @@ class ProjectController extends Controller
                 $pattern->save();
             }
         }
-        // Sending json response to client
-        // return redirect('/readbuildpattern');
-        // return readbuildpattern();
+
         return response()->json([
-            // "status" => true,
             "data" => $request->data
         ]);
-        // return response()->json($request->data);
-
-        // return response()->json($request->input("regionName"));
     }
-    // }
     public function buildpatternget()
     {
         return view('projects.buildproject');
     }
     public function readbuildpattern()
     {
-        // $Pattern = pattern::all();
         $id = Auth::id();
         // dd($id);
         $Pattern = pattern::where('user', $id)->get();
         $patternNames = pattern::where('user', $id)->select('name')
-        ->orderBy('name')
-        ->groupBy('name')
-        ->get();
+            ->orderBy('name')
+            ->groupBy('name')
+            ->get();
         // dd($Pattern);
         // dd(response()->json($Pattern));
-        // $Pattern = $Pattern->toArray();
         $x = 10;
-        // $userInfo = User::find(Auth::id())->with('personalInfo')->first();
 
         return view('projects.readbuildproject', compact('Pattern', 'patternNames'));
-        // return view('projects.readbuildproject', ['data' => $Pattern]);
-
     }
     public function readbuildpatternew($pattern)
     {
@@ -369,9 +303,9 @@ class ProjectController extends Controller
         // dd($id);
         $Pattern = pattern::findOrFail($pattern);
         $patternNames = pattern::where('user', $id)->select('name')
-        ->orderBy('name')
-        ->groupBy('name')
-        ->get();
+            ->orderBy('name')
+            ->groupBy('name')
+            ->get();
         return view('projects.readbuildprojectnew', compact('Pattern', 'patternNames'));
     }
     public function deleteproject(Request $request)
@@ -382,7 +316,6 @@ class ProjectController extends Controller
             $pat->delete();
         }
         return response()->json([
-            // "status" => true,
             "data" => $request->data
         ]);
     }

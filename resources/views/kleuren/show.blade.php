@@ -11,11 +11,8 @@
             <div class="main">
                 <h1>Miyuki kralen</h1>
                 <div class="">
-
-                    {{-- @foreach ($kleuren->chunk(8) as $chunk) --}}
                     <div class="row">
                         @foreach ($kleuren as $kleur)
-                            {{-- @foreach ($chunk as $kleur) --}}
                             <div class="col">
                                 <div class="kleurenkaart">
                                     @if ($kleur->hexa != '#0')
@@ -32,7 +29,6 @@
                                     {{ $kleur->kleur }}
                                 </div>
                             </div>
-                            {{-- @endforeach --}}
                         @endforeach
                     </div>
                 </div>

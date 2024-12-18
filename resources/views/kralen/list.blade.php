@@ -103,7 +103,6 @@
                                                 @if ($kraleninmix->kraalnr == $kraal->id)
                                                     <a class="text-decoration-none"
                                                         href="{{ route('kralen.show', $kraleninmix->mixnr) }}">
-                                                        {{-- {{ $separator = $kraleninmix != end($mix) ? ',<br>' : '' }} --}}
                                                         {{ $kraleninmix->name }} <br>
                                                     </a>
                                                 @endif

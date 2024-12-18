@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Kleur;
 use App\Models\Kleurtype;
-use App\Models\Kraal;
-use App\Http\Controllers\Input;
 use Illuminate\Support\Facades\Validator;
 
 class KleurenController extends Controller
@@ -19,25 +17,17 @@ class KleurenController extends Controller
     {
         $kleurcollectie = kleurtype::Join('kleurs', 'kleurtypes.kleurid', '=', 'kleurs.id')
             ->join('kraals', 'kraals.id', '=', 'kleurtypes.kraalid')
-            // ->where('kleurs.id', '=', $id)
             ->get();
-        // $kleuren = Kleur::orderBy('kleur', 'ASC')->get();
         // dd($kleurcollectie);
         return redirect()->route('kleuren.show', '2');
-        // return view('kleuren.index', compact('kleuren', 'kleurcollectie'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return view('kleuren.createkleuren');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -62,13 +52,9 @@ class KleurenController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     */
+
     public function show(string $id)
     {
-
-
 
         $kleurcollectie = kleurtype::Join('kleurs', 'kleurtypes.kleurid', '=', 'kleurs.id')
             ->join('kraals', 'kraals.id', '=', 'kleurtypes.kraalid')
@@ -81,9 +67,7 @@ class KleurenController extends Controller
         return view('kleuren.show', compact('kleuren', 'kleurcollectie', 'currentkleur'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+
     public function edit(string $id)
     {
         //
@@ -103,16 +87,5 @@ class KleurenController extends Controller
     public function destroy(string $id)
     {
         //
-    }
-    public function kralenopkleur(string $id)
-    {
-        //nog niet compleet, moet met join worden
-        // $kleuren = kleurtype::where('kraalid', '=', $id)->all();
-        // $kralenkleurarray = array();
-        // foreach ($kleuren as $kleur) {
-        //     $kralenuitkleur = Kraal::where('id', '=', $kleur->kraalid);
-        //     array_push($kralenkleurarray)
-        // }
-        // return view('kralen.index', compact('kleuren'));
     }
 }

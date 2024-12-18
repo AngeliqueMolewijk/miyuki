@@ -22,12 +22,6 @@
                     </li>
                     <li><a href="{{ route('projects.create') }}"
                             class="link-body-emphasis d-inline-flex text-decoration-none rounded">Nieuw Project</a></li>
-                    {{-- <a class="nav-link" aria-current="page" href={{ route('projects.create') }}>Create
-                        project</a>
-                    <a class="nav-link" href="{{ route('createCategorie') }}"> Nieuwe categorie</a> --}}
-
-
-
                 </ul>
             </div>
         </li>
@@ -44,14 +38,6 @@
                         <li> @sortablelink('name', 'Naam')
                         </li>
                         <li>@sortablelink('nummer', 'Nummer')</li>
-                        {{-- <li><a href="#"
-                            class="link-body-emphasis d-inline-flex text-decoration-none rounded">Overview</a></li>
-                    <li><a href="#"
-                            class="link-body-emphasis d-inline-flex text-decoration-none rounded">Weekly</a></li>
-                    <li><a href="#"
-                            class="link-body-emphasis d-inline-flex text-decoration-none rounded">Monthly</a></li>
-                    <li><a href="#"
-                            class="link-body-emphasis d-inline-flex text-decoration-none rounded">Annually</a></li> --}}
                     </ul>
                 </div>
             </li>
@@ -100,8 +86,6 @@
                         <li><a href={{ url('/opvoorraad') }}
                                 class="link-body-emphasis d-inline-flex text-decoration-none rounded">Op voorraad</a>
                         </li>
-                        {{-- <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Sign
-                                out</a></li> --}}
                     </ul>
                 </div>
             </li>

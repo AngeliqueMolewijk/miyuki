@@ -68,6 +68,7 @@ class KralenController extends Controller
 
     public function storemix(Request $request)
     {
+        //store a bead as mix
         $Mix = new Mix();
         $Mix->kraalnr = $request->kraalid;
         $Mix->mixnr = $request->mixid;
@@ -78,6 +79,7 @@ class KralenController extends Controller
     }
     public function destroymix(Mix $Mix)
     {
+        //check if both are in use destroymix / destroyuitmix
         $Mix->delete();
 
         return redirect()->route('kralen.index')
@@ -85,6 +87,8 @@ class KralenController extends Controller
     }
     public function destroyuitmix($mixid, $kraalid)
     {
+        //check if both are in use destroymix / destroyuitmix
+
         $mixkraal = Mix::where('kraalnr', $kraalid)->where('mixnr', $mixid);
         $mixkraal->delete();
         return back();
@@ -92,6 +96,7 @@ class KralenController extends Controller
 
     public function show($id)
     {
+        // show beads,mix and colors
         $kraal = Kraal::findOrFail($id);
 
         $projecten = Project::rightJoin('projectkraals', 'projectkraals.projectid', '=', 'projects.id')
@@ -179,7 +184,7 @@ class KralenController extends Controller
     }
     public function searchmix()
     {
-
+        // show all beads that are mixes
         $kralen = Kraal::sortable(['name' => 'desc'])->where('name', 'like', "%mix%")->get();
 
 
@@ -189,6 +194,7 @@ class KralenController extends Controller
     }
     public function list()
     {
+        // a table in edit view to quick edit data
         $kralen = Kraal::sortable(['stock' => 'desc'])->orderBy('nummer', 'ASC')->get();
         $kleuren = Kleur::orderBy('kleur', 'ASC')->get();
         $mix = Mix::join('kraals', 'kraals.id', '=',  'mixes.mixnr')->get();
@@ -204,6 +210,7 @@ class KralenController extends Controller
 
     public function testgrid()
     {
+        // no longer in use
         $kralen = Kraal::orderBy('nummer', 'ASC')->get();
         return view('kralen.test', compact('kralen'));
     }
@@ -213,9 +220,7 @@ class KralenController extends Controller
         ->select('kleurnumber.*', 'allekralen.name as allekralename', 'allekralen.image')
         ->get();
 
-        // return response()->json($kralen);
-        // $kralen = Allekralen::all();
-        // dd($kralen);
+
         $aantalmix = Mix::all();
         return view('kralen.allekralen', compact('kralen', 'aantalmix'));
     }
