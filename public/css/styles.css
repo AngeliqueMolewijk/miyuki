@@ -197,3 +197,12 @@ button {
 .pt-10{
    padding-top:20px; 
 }
+@media screen and (max-width: 775px) {
+  #sidebarshow 
+    {display:none;}
+
+  /* #titlelist{
+    display: block;
+  } */
+  
+}
